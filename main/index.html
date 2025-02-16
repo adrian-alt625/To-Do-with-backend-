@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div>
+      <button class="dark-mode" id="darkBtn"></button>
+    </div>
+    <div class="button-container">
+      <h3 class="heading">The .txt based To-Do list</h3>
+      <button class="uploadBtn">Upload</button>
+      <input
+        type="file"
+        class="fileInput"
+        accept=".txt"
+        style="display: none"
+      />
+
+      <button class="createBtn">Create</button>
+    </div>
+    <div class="main-container">
+      <h2 class="heading2">To-Do List</h2>
+      <div class="row-input">
+        <input class="input" "text" placeholder="Enter a To-Do" />
+        <button class="take-input">Add</button>
+      </div>
+      <div class="list-container">
+        <ul class="list">
+          <!-- <li class="checked">hello world</li> -->
+        </ul>
+      </div>
+      <button class="save"></button>
+    </div>
+    <script src="script.js" defer></script>
+  </body>
+</html>
