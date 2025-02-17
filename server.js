@@ -44,7 +44,8 @@ app.post("/todos", async (req, res) => {
 
 app.delete("/todos/:id", async (req, res) => {
   const { id } = req.params;
-  await Todo.findByIdAndDelete(id);
+  const deletedTodo = await Todo.findByIdAndDelete(id);
+  res.json({ message: "todo deleted successfully", deletedTodo });
 });
 
 app.listen(

@@ -87,6 +87,8 @@ list.addEventListener("click", function (e) {
     console.log(item);
     let index = todos.indexOf(item);
     if (index !== -1) {
+      removeFromDB(todosArrayId[index]);
+      todosArrayId.splice(index, 1);
       todos.splice(index, 1);
     }
     console.log(todos);
