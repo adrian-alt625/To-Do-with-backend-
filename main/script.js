@@ -20,29 +20,29 @@ upload.addEventListener("click", openFE);
 //what happens when "upload" button is pressed
 function openFE() {
   console.log("hello world");
-  fileInput.click();
+  readFile();
 }
 
 //calls the "readFile" function when a file is uploaded
-fileInput.addEventListener("change", readFile);
 //reading the file, creating an array where each line is stored seperately in an array
-function readFile() {
-  console.log("hi guys");
+async function readFile() {
+  // let reader = new FileReader();
 
-  let reader = new FileReader();
+  // reader.readAsText(fileInput.files[0]);
 
-  reader.readAsText(fileInput.files[0]);
+  // reader.onload = function () {
+  //   let text = reader.result;
 
-  reader.onload = function () {
-    let text = reader.result;
-
-    text = text.split("\n");
-    text = text.map((line) => line.trim());
-    console.log(text);
-    change();
-    addFromFile(text);
-    console.log(todos);
-  };
+  //   text = text.split("\n");
+  //   text = text.map((line) => line.trim());
+  //   console.log(text);
+  change();
+  // addFromFile(text);
+  await loadTodos();
+  console.log(todosArrayName);
+  addFromFile(todosArrayName);
+  console.log(todosArrayId);
+  // };
 }
 
 // calls the "change" function when "create" button is clicked
@@ -138,7 +138,7 @@ darkMode.addEventListener("click", toggleDarkMode);
 const baseUrl = "http://localhost:2000";
 
 async function postInfo() {
-  await fetch(baseUrl, {
+  let response = await fetch(baseUrl + "/todos", {
     method: "POST",
     headers: {
       "Content-Type": "application/json", // the type of file (json)
@@ -148,4 +148,45 @@ async function postInfo() {
       completed: false,
     }),
   });
+  let newTodo = await response.json(); // Get the newly created todo object
+  todosArrayId.push(newTodo._id); // Add its ID to the array
+  console.log(todosArrayId);
+  console.log("New todo added with ID:", newTodo._id);
+}
+
+let todosArrayName = [];
+let todosArrayId = [];
+
+async function fetchTodos() {
+  let response = await fetch(baseUrl + "/todo");
+  let todos = await response.json();
+  return todos;
+}
+
+//function to wait for the data before updating the "todosArray"
+async function loadTodos() {
+  todosArrayName = await delayTodosName();
+  todosArrayId = await delayTodosId();
+}
+
+//function to wait for the data to arrive before being able to use it
+async function delayTodosName() {
+  let todos = await fetchTodos();
+  let todosArrayName = todos.map((todo) => todo.task);
+  console.log(todosArrayName);
+  return todosArrayName;
+}
+
+async function delayTodosId() {
+  let todos = await fetchTodos();
+  let todosArrayId = todos.map((todo) => todo._id);
+  console.log(todosArrayId);
+  return todosArrayId;
+}
+
+async function removeFromDB(id) {
+  await fetch(baseUrl + "/todos/" + id, {
+    method: "DELETE",
+  });
+  console.log("Todo deleted");
 }
