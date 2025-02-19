@@ -39,9 +39,8 @@ async function readFile() {
   change();
   // addFromFile(text);
   await loadTodos();
-  console.log(todosArrayName);
   addFromFile(todosArrayName);
-  console.log(todosArrayId);
+
   // };
 }
 
@@ -112,6 +111,11 @@ function addFromFile(arr) {
     span.innerHTML = "&#10006";
     li.appendChild(span);
     todos.push(arr[i]);
+    getTodoStatus(todosArrayId[i]).then((status) => {
+      if (status == true) {
+        li.classList.toggle("checked");
+      }
+    });
   }
 }
 
@@ -204,4 +208,11 @@ async function toggleCompletedDB(id) {
   });
   let updatedTodo = await response.json();
   console.log("Updated Todo", updatedTodo);
+}
+
+async function getTodoStatus(id) {
+  let response = await fetch(baseUrl + "/todos/" + id);
+  let todo = await response.json();
+  `Task: ${todo.task}, Completed: ${todo.completed}`;
+  return todo.completed;
 }

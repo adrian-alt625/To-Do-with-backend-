@@ -60,6 +60,12 @@ app.patch("/todos/:id", async (req, res) => {
   res.json({ message: "Todo updated", updatedTodo });
 });
 
+app.get("/todos/:id", async (req, res) => {
+  const { id } = req.params;
+  const todo = await Todo.findById(id);
+  res.json(todo);
+});
+
 app.listen(
   port,
   console.log("✅ server has started on http://localhost:" + port)
