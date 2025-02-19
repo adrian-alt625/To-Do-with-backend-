@@ -66,6 +66,11 @@ app.get("/todos/:id", async (req, res) => {
   res.json(todo);
 });
 
+app.delete("/todos", async (req, res) => {
+  await Todo.deleteMany({}); // Deletes all todos
+  res.json({ message: "All todos deleted" });
+});
+
 app.listen(
   port,
   console.log("✅ server has started on http://localhost:" + port)

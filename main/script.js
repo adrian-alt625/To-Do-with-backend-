@@ -46,6 +46,7 @@ async function readFile() {
 
 // calls the "change" function when "create" button is clicked
 create.addEventListener("click", change);
+create.addEventListener("click", clearDB);
 
 // make a function that removes the "startup" elements and adds the to-do-list elements
 function change() {
@@ -215,4 +216,10 @@ async function getTodoStatus(id) {
   let todo = await response.json();
   `Task: ${todo.task}, Completed: ${todo.completed}`;
   return todo.completed;
+}
+
+async function clearDB() {
+  let response = await fetch(baseUrl + "/todos", {
+    method: "DELETE",
+  });
 }
