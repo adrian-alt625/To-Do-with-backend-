@@ -81,6 +81,11 @@ function addToList() {
 list.addEventListener("click", function (e) {
   if (e.target.tagName === "LI") {
     e.target.classList.toggle("checked");
+    let item = e.target.textContent;
+    item = item.slice(0, -1);
+    console.log(item);
+    let index = todos.indexOf(item);
+    toggleCompletedDB(todosArrayId[index]);
   } else if (e.target.tagName === "SPAN") {
     let item = e.target.parentElement.textContent;
     item = item.slice(0, -1);
@@ -191,4 +196,12 @@ async function removeFromDB(id) {
     method: "DELETE",
   });
   console.log("Todo deleted");
+}
+
+async function toggleCompletedDB(id) {
+  let response = await fetch(baseUrl + "/todos/" + id, {
+    method: "PATCH",
+  });
+  let updatedTodo = await response.json();
+  console.log("Updated Todo", updatedTodo);
 }

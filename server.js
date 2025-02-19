@@ -48,6 +48,18 @@ app.delete("/todos/:id", async (req, res) => {
   res.json({ message: "todo deleted successfully", deletedTodo });
 });
 
+app.patch("/todos/:id", async (req, res) => {
+  const { id } = req.params;
+  const todo = await Todo.findById(id);
+  const updatedTodo = await Todo.findByIdAndUpdate(
+    id,
+    { $set: { completed: !todo.completed } },
+    { new: true }
+  );
+
+  res.json({ message: "Todo updated", updatedTodo });
+});
+
 app.listen(
   port,
   console.log("✅ server has started on http://localhost:" + port)
