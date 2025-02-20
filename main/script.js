@@ -150,6 +150,8 @@ darkMode.addEventListener("click", toggleDarkMode);
 const baseUrl = "http://localhost:2000";
 
 async function postInfo() {
+  const userId = getCurrentUserId();
+  console.log(userId);
   let response = await fetch(baseUrl + "/todos", {
     method: "POST",
     headers: {
@@ -158,6 +160,7 @@ async function postInfo() {
     body: JSON.stringify({
       task: mainInput.value,
       completed: false,
+      userId: getCurrentUserId(),
     }),
   });
   let newTodo = await response.json(); // Get the newly created todo object
@@ -170,7 +173,7 @@ let todosArrayName = [];
 let todosArrayId = [];
 
 async function fetchTodos() {
-  let response = await fetch(baseUrl + "/todo");
+  let response = await fetch(`${baseUrl}/todos?userId=${userId}`);
   let todos = await response.json();
   return todos;
 }
@@ -222,4 +225,71 @@ async function clearDB() {
   let response = await fetch(baseUrl + "/todos", {
     method: "DELETE",
   });
+}
+
+//code starting for all things related to login/signup
+const buttonContainer = document.querySelector(".button-container");
+const loginSignupContainer = document.querySelector(".login-signup-container");
+const loginOptionBtn = document.querySelector(".loginBtn");
+const signupOptionBtn = document.querySelector(".signupBtn");
+const loginPage = document.querySelector(".login-page");
+const signupPage = document.querySelector(".signup-page");
+const signupUsername = document.querySelector(".input-username-signup");
+const signupPassword = document.querySelector(".input-password-signup");
+const submitSignup = document.querySelector(".submit-signupBtn");
+
+loginOptionBtn.addEventListener("click", changeToLogin);
+signupOptionBtn.addEventListener("click", changeToSignup);
+
+function changeToLogin() {
+  loginSignupContainer.style.display = "none";
+  loginPage.style.display = "block";
+}
+
+function changeToSignup() {
+  loginSignupContainer.style.display = "none";
+  signupPage.style.display = "block";
+}
+
+function changeToMainFromLogin() {
+  buttonContainer.style.display = "block";
+  loginPage.style.display = "none";
+}
+function changeToMainFromSignup() {
+  buttonContainer.style.display = "block";
+  signupPage.style.display = "none";
+}
+
+async function createAccount() {
+  const username = signupUsername.value;
+  const password = signupPassword.value;
+
+  if (username !== "" && password !== "") {
+    try {
+      const response = await fetch(baseUrl + "/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      console.log(data.message);
+      if (data.userId) {
+        localStorage.setItem("userId", data.userId);
+        console.log("user ID: " + data.userId);
+        changeToMainFromSignup();
+      } else {
+        console.log("no user Id from backend");
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }
+}
+
+submitSignup.addEventListener("click", createAccount);
+
+function getCurrentUserId() {
+  return localStorage.getItem("userId");
 }

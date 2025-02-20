@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 2000;
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 require("dotenv").config();
 console.log("MONGO_URI:", process.env.MONGO_URI);
@@ -20,6 +21,7 @@ app.use(express.json());
 const todoSchema = new mongoose.Schema({
   task: { type: String, required: true }, // Task name (required)
   completed: { type: Boolean, default: false }, // Completion status (default: false)
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
 
 // Create and export the Todo model
@@ -28,15 +30,16 @@ const Todo = mongoose.model("Todo", todoSchema);
 module.exports = Todo;
 
 app.get("/todo", async (req, res) => {
-  const oldTodos = await Todo.find();
+  const { userId } = req.query;
+  const oldTodos = await Todo.find({ userId });
   res.json(oldTodos);
 });
 
 app.post("/todos", async (req, res) => {
-  const { task, completed } = req.body;
-  console.log({ task, completed });
+  const { task, completed, userId } = req.body;
+  console.log({ task, completed, userId });
   // res.send({ status: "recieved" });
-  const newTodo = new Todo({ task, completed });
+  const newTodo = new Todo({ task, completed, userId });
   const savedTodo = await newTodo.save();
   console.log("Saved To-Do: " + savedTodo);
   res.json(savedTodo);
@@ -69,6 +72,38 @@ app.get("/todos/:id", async (req, res) => {
 app.delete("/todos", async (req, res) => {
   await Todo.deleteMany({}); // Deletes all todos
   res.json({ message: "All todos deleted" });
+});
+
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+const User = mongoose.model("User", userSchema);
+module.exports = User;
+
+app.post("/signup", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    //check if the username already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.json({ message: "Username already taken " });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    //create new user
+    const newUser = new User({ username, password: hashedPassword });
+    const savedUser = await newUser.save();
+    console.log("saved user:", savedUser);
+
+    res.json({
+      message: "New user created successfully",
+      userId: savedUser._id,
+    });
+  } catch (err) {
+    console.error("Error creating user:", err);
+    res.json({ message: "Serving error" });
+  }
 });
 
 app.listen(
