@@ -346,3 +346,19 @@ async function loginAccount() {
 }
 
 submitLogin.addEventListener("click", loginAccount);
+
+const buttons = document.querySelectorAll(".backArrowBtn");
+
+// Attach event listeners to each button
+buttons.forEach((button) => {
+  button.addEventListener("click", function (event) {
+    // Find the closest parent <div> of the clicked button
+    const parentDiv = event.target.closest("div");
+
+    // Check if the parent div is found and hide it
+    if (parentDiv) {
+      parentDiv.style.display = "none";
+      loginSignupContainer.style.display = "block";
+    }
+  });
+});

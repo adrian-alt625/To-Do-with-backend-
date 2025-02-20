@@ -487,14 +487,13 @@ body {
   border: 0px solid transparent;
   display: block;
   transition: 0.2s ease;
-  color: #191919;
   background: none;
   cursor: pointer;
   padding: 10px;
 }
 
 .backArrowBtn:hover {
-  background-color: #f7f7f7;
+  background-color: #ededed;
 }
 
 .backArrowBtn img {
@@ -632,4 +631,14 @@ body {
 }
 .dark-mode .submit-signupBtn:active {
   background: #155d34;
+}
+.dark-mode .incorrect-details {
+  color: rgb(180, 180, 180);
+}
+.dark-mode .backArrowBtn:hover {
+  background-color: rgb(68, 68, 68);
+}
+
+.dark-mode .backArrowBtn img {
+  content: url("assets/back-button/dark-mode-back-arrow.svg");
 }
