@@ -14,6 +14,7 @@ const mainInput = document.querySelector(".input");
 const list = document.querySelector(".list");
 const saveBtn = document.querySelector(".save");
 const darkMode = document.querySelector(".dark-mode");
+const errorLogin = document.querySelector(".incorrect-details");
 let todos = [];
 //initiating file input (through file explorer) once the "upload" button is pressed
 upload.addEventListener("click", openFE);
@@ -54,6 +55,7 @@ function change() {
   btnContainer.style.display = "none";
   //adding new elements
   main.style.display = "block";
+  heading2.textContent = userName + "'s To-Do List";
 }
 
 add.addEventListener("click", addToList);
@@ -271,6 +273,8 @@ function changeToMainFromSignup() {
   signupPage.style.display = "none";
 }
 
+let userName;
+
 //signing up
 async function createAccount() {
   const username = signupUsername.value;
@@ -291,6 +295,8 @@ async function createAccount() {
         localStorage.setItem("userId", data.userId);
         console.log("user ID: " + data.userId);
         changeToMainFromSignup();
+        userName = username;
+        heading.textContent = userName + "'s To-Do List";
       } else {
         console.log("no user Id from backend");
       }
@@ -322,12 +328,16 @@ async function loginAccount() {
       });
       const data = await response.json();
       console.log(data.message);
+
       if (data.userId) {
         localStorage.setItem("userId", data.userId);
         console.log("Logged in user ID: " + data.userId);
         changeToMainFromLogin();
+        userName = username;
+        heading.textContent = userName + "'s To-Do List";
       } else {
         console.log("Login failed");
+        errorLogin.style.display = "block";
       }
     } catch (error) {
       console.log("error:", error);
