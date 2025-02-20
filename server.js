@@ -75,8 +75,9 @@ app.get("/todos/:id", async (req, res) => {
 });
 
 app.delete("/todos", async (req, res) => {
-  await Todo.deleteMany({}); // Deletes all todos
-  res.json({ message: "All todos deleted" });
+  const { userId } = req.query;
+  await Todo.deleteMany({ userId });
+  res.json({ message: "Todos for user deleted" });
 });
 
 const userSchema = new mongoose.Schema({

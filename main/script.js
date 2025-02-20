@@ -228,9 +228,11 @@ async function getTodoStatus(id) {
 }
 
 async function clearDB() {
-  let response = await fetch(baseUrl + "/todos", {
+  const userId = getCurrentUserId();
+  let response = await fetch(`${baseUrl}/todos?userId=${userId}`, {
     method: "DELETE",
   });
+  console.log("todos for currently logged in user deleted");
 }
 
 //code starting for all things related to login/signup
