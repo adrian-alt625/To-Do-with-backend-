@@ -237,6 +237,9 @@ const signupPage = document.querySelector(".signup-page");
 const signupUsername = document.querySelector(".input-username-signup");
 const signupPassword = document.querySelector(".input-password-signup");
 const submitSignup = document.querySelector(".submit-signupBtn");
+const loginUsername = document.querySelector(".input-username-login");
+const loginPassword = document.querySelector(".input-password-login");
+const submitLogin = document.querySelector(".submit-loginBtn");
 
 loginOptionBtn.addEventListener("click", changeToLogin);
 signupOptionBtn.addEventListener("click", changeToSignup);
@@ -260,6 +263,7 @@ function changeToMainFromSignup() {
   signupPage.style.display = "none";
 }
 
+//signing up
 async function createAccount() {
   const username = signupUsername.value;
   const password = signupPassword.value;
@@ -293,3 +297,34 @@ submitSignup.addEventListener("click", createAccount);
 function getCurrentUserId() {
   return localStorage.getItem("userId");
 }
+
+//logging in
+async function loginAccount() {
+  const username = loginUsername.value;
+  const password = loginPassword.value;
+
+  if (username !== "" && password !== "") {
+    try {
+      const response = await fetch(baseUrl + "/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      console.log(data.message);
+      if (data.userId) {
+        localStorage.setItem("userId", data.userId);
+        console.log("Logged in user ID: " + data.userId);
+        changeToMainFromLogin();
+      } else {
+        console.log("Login failed");
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+}
+
+submitLogin.addEventListener("click", loginAccount);

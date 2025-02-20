@@ -3,6 +3,8 @@ const app = express();
 const port = 2000;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const cors = require("cors");
+app.use(cors());
 
 require("dotenv").config();
 console.log("MONGO_URI:", process.env.MONGO_URI);
@@ -104,6 +106,21 @@ app.post("/signup", async (req, res) => {
     console.error("Error creating user:", err);
     res.json({ message: "Serving error" });
   }
+});
+
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  if (!user) {
+    return res.json({ message: "user not found " });
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.json({ message: "Incorrect password" });
+  }
+
+  res.json({ message: "login successful", userId: user._id });
 });
 
 app.listen(
