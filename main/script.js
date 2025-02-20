@@ -173,8 +173,14 @@ let todosArrayName = [];
 let todosArrayId = [];
 
 async function fetchTodos() {
-  let response = await fetch(`${baseUrl}/todos?userId=${userId}`);
+  const userId = getCurrentUserId();
+  if (!userId) {
+    console.log("no userId found");
+    return [];
+  }
+  let response = await fetch(`${baseUrl}/todo?userId=${userId}`);
   let todos = await response.json();
+  console.log("Fetched Todos: ", todos);
   return todos;
 }
 

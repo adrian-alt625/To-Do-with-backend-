@@ -33,6 +33,9 @@ module.exports = Todo;
 
 app.get("/todo", async (req, res) => {
   const { userId } = req.query;
+  if (!userId) {
+    return res.json({ message: "user ID not found " });
+  }
   const oldTodos = await Todo.find({ userId });
   res.json(oldTodos);
 });
