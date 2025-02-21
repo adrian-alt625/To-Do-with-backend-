@@ -8,11 +8,7 @@
 }
 
 body {
-  background-image: linear-gradient(
-    to right,
-    rgb(184, 9, 220),
-    rgb(248, 72, 111)
-  );
+  background-image: linear-gradient(to right, #ffc2c4, #9d72cb);
   margin: 0;
   padding: 0;
   font-family: Poppins;
@@ -26,12 +22,12 @@ body {
   top: 50%;
   left: 50%;
   /* half height and width values */
-  margin-top: -125px;
+  margin-top: -135px;
   margin-left: -200px;
-  height: 250px;
+  height: 275px;
   width: 400px;
   background-color: white;
-  border-radius: 25px;
+  border-radius: 10px;
 }
 
 .button-container h3 {
@@ -49,7 +45,7 @@ body {
   width: 100px;
   height: 50px;
   margin: 50px;
-  margin-top: 7%;
+  margin-top: 9%;
   margin-left: 33%;
   margin-bottom: 45px;
   font-size: 15px;
@@ -59,6 +55,7 @@ body {
   border: 0px solid transparent;
   display: inline-block;
   transition: 0.2s ease;
+  cursor: pointer;
 }
 .uploadBtn:hover {
   background: #d09c00;
@@ -83,6 +80,7 @@ body {
   box-shadow: 0px 0px 0px transparent;
   border: 0px solid transparent;
   transition: 0.2s ease;
+  cursor: pointer;
 }
 .createBtn:hover {
   background: rgb(40, 192, 91);
@@ -105,7 +103,7 @@ body {
   height: fit-content;
   width: 500px;
   background-color: white;
-  border-radius: 25px;
+  border-radius: 10px;
   padding-bottom: 25px;
 }
 
@@ -257,12 +255,12 @@ body {
   top: 50%;
   left: 50%;
   /* half height and width values */
-  margin-top: -125px;
+  margin-top: -150px;
   margin-left: -175px;
-  height: 250px;
+  height: 300px;
   width: 350px;
   background-color: white;
-  border-radius: 25px;
+  border-radius: 10px;
 }
 
 .login-signup-container h3 {
@@ -280,7 +278,7 @@ body {
   width: 100px;
   height: 50px;
   margin: 50px;
-  margin-top: 7%;
+  margin-top: 12%;
   margin-left: 33%;
   margin-bottom: 45px;
   font-size: 15px;
@@ -290,6 +288,7 @@ body {
   border: 0px solid transparent;
   display: inline-block;
   transition: 0.2s ease;
+  cursor: pointer;
 }
 .loginBtn:hover {
   background: #d09c00;
@@ -314,6 +313,7 @@ body {
   box-shadow: 0px 0px 0px transparent;
   border: 0px solid transparent;
   transition: 0.2s ease;
+  cursor: pointer;
 }
 .signupBtn:hover {
   background: rgb(40, 192, 91);
@@ -337,7 +337,7 @@ body {
   height: 300px;
   width: 400px;
   background-color: white;
-  border-radius: 25px;
+  border-radius: 10px;
   padding-top: 15px;
 }
 
@@ -345,7 +345,7 @@ body {
   border: none;
   border-radius: 20px;
   background-color: rgb(236, 236, 236);
-  margin-left: 30px;
+  margin-left: 45px;
   height: 45px;
   width: 250px;
   padding-left: 20px;
@@ -387,6 +387,7 @@ body {
   border: 0px solid transparent;
   display: inline-block;
   transition: 0.2s ease;
+  cursor: pointer;
 }
 .submit-loginBtn:hover {
   background: #d09c00;
@@ -409,7 +410,7 @@ body {
   height: 300px;
   width: 400px;
   background-color: white;
-  border-radius: 25px;
+  border-radius: 10px;
   padding-top: 15px;
 }
 
@@ -417,7 +418,7 @@ body {
   border: none;
   border-radius: 20px;
   background-color: rgb(236, 236, 236);
-  margin-left: 30px;
+  margin-left: 45px;
   height: 45px;
   width: 250px;
   padding-left: 20px;
@@ -460,6 +461,7 @@ body {
   border: 0px solid transparent;
   display: inline-block;
   transition: 0.2s ease;
+  cursor: pointer;
 }
 .submit-signupBtn:hover {
   background: rgb(40, 192, 91);
@@ -517,16 +519,16 @@ body {
 }
 
 .dark-mode {
-  background-image: linear-gradient(to right, black, purple);
+  background-image: linear-gradient(to right, #371d2f, #362051);
 }
 
 .dark-mode .button-container {
-  background: #262626;
+  background: #202020;
 }
 
 .dark-mode .button-container h3 {
-  background: #262626;
-  color: #ff38f5;
+  background: #202020;
+  color: #e233d9;
 }
 
 .dark-mode .uploadBtn {
@@ -550,11 +552,11 @@ body {
 }
 
 .dark-mode .main-container {
-  background: #262626;
+  background: #202020;
 }
 
 .dark-mode .main-container h2 {
-  color: #ff38f5;
+  color: #e233d9;
 }
 
 .dark-mode .row-input input {
@@ -569,14 +571,17 @@ body {
 .dark-mode .list li span {
   color: #a9a9a9;
 }
+.dark-mode .list li span:hover {
+  background-color: #363636;
+}
 
 .dark-mode .login-signup-container {
-  background: #262626;
+  background: #202020;
 }
 
 .dark-mode .login-signup-container h3 {
-  background: #262626;
-  color: #ff38f5;
+  background: #202020;
+  color: #e233d9;
 }
 
 .dark-mode .loginBtn {
@@ -600,7 +605,7 @@ body {
 }
 
 .dark-mode .login-page {
-  background: #262626;
+  background: #202020;
 }
 .dark-mode .login-page input {
   background-color: #4a4a4a;
@@ -617,7 +622,7 @@ body {
 }
 
 .dark-mode .signup-page {
-  background: #262626;
+  background: #202020;
 }
 .dark-mode .signup-page input {
   background-color: #4a4a4a;

@@ -347,16 +347,21 @@ async function loginAccount() {
 
 submitLogin.addEventListener("click", loginAccount);
 
-const buttons = document.querySelectorAll(".backArrowBtn");
+const backButtons = document.querySelectorAll(".backArrowBtn");
 
 // Attach event listeners to each button
-buttons.forEach((button) => {
-  button.addEventListener("click", function (event) {
+backButtons.forEach((backButton) => {
+  backButton.addEventListener("click", function (event) {
     // Find the closest parent <div> of the clicked button
     const parentDiv = event.target.closest("div");
 
     // Check if the parent div is found and hide it
     if (parentDiv) {
+      errorLogin.style.display = "none";
+      signupUsername.value = "";
+      signupPassword.value = "";
+      loginPassword.value = "";
+      loginUsername.value = "";
       parentDiv.style.display = "none";
       loginSignupContainer.style.display = "block";
     }
