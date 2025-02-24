@@ -83,6 +83,38 @@
       <button class="contactBtn">Contact</button>
       <button class="log-outBtn">Log out</button>
     </div>
+    <div class="change-details-menu">
+      <h3>Change Details</h3>
+      <button class="close-change-detailsBtn">
+        <img src="assets/close-icons/black-close.svg" />
+      </button>
+      <!-- Username Change form -->
+      <form class="change-username-form">
+        <input
+          type="text"
+          placeholder="New Username"
+          class="new-username"
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
+      <!-- Password Change Form -->
+      <form class="change-password-form">
+        <input
+          type="password"
+          placeholder="Current Password"
+          class="current-password"
+          required
+        />
+        <input
+          type="password"
+          placeholder="New Password"
+          class="new-password"
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
     <div class="blur-overlay"></div>
     <script src="script.js" defer></script>
   </body>

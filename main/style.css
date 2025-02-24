@@ -680,6 +680,100 @@ body {
   background: rgb(118, 25, 25);
 }
 
+.change-details-menu {
+  display: none;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* half height and width values */
+  margin-top: -210px;
+  margin-left: -185px;
+  height: 420px;
+  width: 375px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  z-index: 10;
+}
+.change-details-menu h3 {
+  display: inline-block;
+  vertical-align: middle;
+  background: rgb(255, 255, 255);
+  color: #a300a3;
+  margin: 20px;
+  margin-left: 30px;
+  margin-bottom: 0;
+  font-size: 27px;
+}
+
+.close-change-detailsBtn {
+  display: inline-block;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  margin-left: 60px;
+  margin-top: 18px;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.close-change-detailsBtn img {
+  width: 24px;
+  height: 24px;
+}
+
+.change-details-menu input {
+  border: none;
+  border-radius: 20px;
+  background-color: rgb(236, 236, 236);
+  margin-left: 45px;
+  height: 45px;
+  width: 220px;
+  padding-left: 20px;
+  outline: none;
+  font-size: 16px;
+  margin-top: 20px;
+  /* margin-top: 30px; */
+}
+
+.change-details-menu input::placeholder {
+  color: #696969;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.change-details-menu input:focus::placeholder {
+  opacity: 0;
+}
+
+.change-details-menu form button {
+  color: rgb(255, 255, 255);
+  background: rgb(47, 228, 107);
+  width: 80px;
+  height: 40px;
+  margin: 25px;
+  margin-top: 10px;
+  margin-left: 37%;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.change-details-menu form button:hover {
+  background: rgb(40, 192, 91);
+  border-radius: 7px;
+  color: rgb(226, 226, 226);
+}
+
+.change-details-menu form button:active {
+  background: rgb(32, 152, 72);
+}
+
 /* dark mode */
 
 .dark-mode #darkBtn {
@@ -863,4 +957,30 @@ body {
 }
 .dark-mode .log-outBtn:active {
   background: #530e0e;
+}
+
+.dark-mode .change-details-menu {
+  background: #202020;
+}
+
+.dark-mode .change-details-menu h3 {
+  background: #202020;
+  color: #e233d9;
+}
+.dark-mode .close-change-detailsBtn img {
+  content: url(assets/close-icons/white-close.svg);
+}
+.dark-mode .change-details-menu input {
+  background-color: #4a4a4a;
+  color: white;
+}
+
+.dark-mode .change-details-menu form button {
+  background: #2ba055;
+}
+.dark-mode .change-details-menu form button:hover {
+  background: #1f7a44;
+}
+.dark-mode .change-details-menu form button:active {
+  background: #155d34;
 }

@@ -386,9 +386,35 @@ function showOptions() {
 }
 
 closeOptionsBtn.addEventListener("click", closeOptions);
-blurOverlay.addEventListener("click", closeOptions);
+blurOverlay.addEventListener("click", blurClicked);
 
 function closeOptions() {
   optionsMenu.style.display = "none";
   blurOverlay.style.display = "none";
+}
+
+function blurClicked() {
+  optionsMenu.style.display = "none";
+  blurOverlay.style.display = "none";
+  changeDetailsMenu.style.display = "none";
+}
+
+const changeDetailsMenu = document.querySelector(".change-details-menu");
+const closeChangeDetailsBtn = document.querySelector(
+  ".close-change-detailsBtn"
+);
+
+profileBtn.addEventListener("click", openChangeDetailsMenu);
+
+function openChangeDetailsMenu() {
+  changeDetailsMenu.style.display = "block";
+  optionsMenu.style.display = "none";
+}
+
+closeChangeDetailsBtn.addEventListener("click", closeChangeDetailsMenu);
+
+function closeChangeDetailsMenu() {
+  blurOverlay.style.display = "none";
+  changeDetailsMenu.style.display = "none";
+  showOptions();
 }
