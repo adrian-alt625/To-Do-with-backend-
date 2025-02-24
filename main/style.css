@@ -31,6 +31,8 @@ body {
 }
 
 .button-container h3 {
+  display: inline-block;
+  vertical-align: middle;
   background: rgb(255, 255, 255);
   color: #a300a3;
   margin: 20px;
@@ -108,6 +110,9 @@ body {
 }
 
 .main-container h2 {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 50px;
   color: rgb(163, 0, 163);
   font-size: 30px;
   margin-left: 30px;
@@ -504,6 +509,177 @@ body {
   display: block;
 }
 
+.settings-cog {
+  display: inline-block;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  margin-left: 65px;
+  margin-top: 15px;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.settings-cog img {
+  width: 22px; /* Adjust the size as needed */
+  height: 22px;
+}
+
+.settings-cog2 {
+  display: inline-block;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  margin-left: 75px;
+  margin-top: 0;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.settings-cog2 img {
+  width: 24px;
+  height: 24px;
+}
+
+.options-menu {
+  display: none;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* half height and width values */
+  margin-top: -175px;
+  margin-left: -135px;
+  height: 350px;
+  width: 275px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  z-index: 10;
+}
+
+.close-optionsBtn {
+  display: inline-block;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  margin-left: 75px;
+  margin-top: 15px;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.close-optionsBtn img {
+  width: 24px;
+  height: 24px;
+}
+
+.blur-overlay {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Dark transparent layer */
+  backdrop-filter: blur(10px); /* Blur effect */
+  z-index: 5;
+}
+
+.options-menu h3 {
+  display: inline-block;
+  vertical-align: middle;
+  background: rgb(255, 255, 255);
+  color: #a300a3;
+  margin: 20px;
+  margin-left: 30px;
+  margin-bottom: 0;
+  font-size: 24px;
+}
+
+.profileBtn {
+  background: #febe00;
+  color: rgb(255, 255, 255);
+  width: 100px;
+  height: 50px;
+  margin: 50px;
+  margin-top: 12%;
+  margin-left: 33%;
+  margin-bottom: 45px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  display: inline-block;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.profileBtn:hover {
+  background: #d09c00;
+  border-radius: 7px;
+  color: rgb(226, 226, 226);
+}
+.profileBtn:active {
+  background: rgb(147, 111, 0);
+}
+
+.contactBtn {
+  color: rgb(255, 255, 255);
+  background: rgb(47, 228, 107);
+  width: 100px;
+  height: 50px;
+  margin: 25px;
+  margin-top: -10%;
+  margin-left: 33%;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.contactBtn:hover {
+  background: rgb(40, 192, 91);
+  border-radius: 7px;
+  color: rgb(226, 226, 226);
+}
+
+.contactBtn:active {
+  background: rgb(32, 152, 72);
+}
+
+.log-outBtn {
+  color: rgb(255, 255, 255);
+  background: rgb(219, 24, 24);
+  width: 100px;
+  height: 50px;
+  margin: 25px;
+  margin-top: 10px;
+  margin-left: 33%;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.log-outBtn:hover {
+  background: rgb(161, 33, 33);
+  border-radius: 7px;
+  color: rgb(226, 226, 226);
+}
+
+.log-outBtn:active {
+  background: rgb(118, 25, 25);
+}
+
 /* dark mode */
 
 .dark-mode #darkBtn {
@@ -646,4 +822,45 @@ body {
 
 .dark-mode .backArrowBtn img {
   content: url("assets/back-button/dark-mode-back-arrow.svg");
+}
+
+.dark-mode .options-menu {
+  background: #202020;
+}
+
+.dark-mode .options-menu img {
+  content: url(assets/close-icons/white-close.svg);
+}
+.dark-mode .options-menu h3 {
+  background: #202020;
+  color: #e233d9;
+}
+.dark-mode .profileBtn {
+  background: #c89c00;
+}
+.dark-mode .profileBtn:hover {
+  background: #966f00;
+}
+.dark-mode .profileBtn:active {
+  background: #745500;
+}
+
+.dark-mode .contactBtn {
+  background: #2ba055;
+}
+.dark-mode .contactBtn:hover {
+  background: #1f7a44;
+}
+.dark-mode .contactBtn:active {
+  background: #155d34;
+}
+
+.dark-mode .log-outBtn {
+  background: #921414;
+}
+.dark-mode .log-outBtn:hover {
+  background: #6c0e0e;
+}
+.dark-mode .log-outBtn:active {
+  background: #530e0e;
 }

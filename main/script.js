@@ -367,3 +367,28 @@ backButtons.forEach((backButton) => {
     }
   });
 });
+
+const settingsCog = document.querySelector(".settings-cog");
+const settingsCog2 = document.querySelector(".settings-cog2");
+const optionsMenu = document.querySelector(".options-menu");
+const closeOptionsBtn = document.querySelector(".close-optionsBtn");
+const profileBtn = document.querySelector(".profileBtn");
+const contactBtn = document.querySelector(".contactBtn");
+const logoutBtn = document.querySelector(".log-outBtn");
+const blurOverlay = document.querySelector(".blur-overlay");
+
+settingsCog.addEventListener("click", showOptions);
+settingsCog2.addEventListener("click", showOptions);
+
+function showOptions() {
+  optionsMenu.style.display = "block";
+  blurOverlay.style.display = "block";
+}
+
+closeOptionsBtn.addEventListener("click", closeOptions);
+blurOverlay.addEventListener("click", closeOptions);
+
+function closeOptions() {
+  optionsMenu.style.display = "none";
+  blurOverlay.style.display = "none";
+}
