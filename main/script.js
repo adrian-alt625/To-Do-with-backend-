@@ -422,10 +422,6 @@ function closeChangeDetailsMenu() {
 const usernameInput = document.querySelector(".new-username");
 const submitUsernameBtn = document.getElementById("submit-usernameBtn");
 
-const currentPasswordInput = document.querySelector(".current-password");
-const newPasswordInput = document.querySelector(".new-password");
-const submitPasswordBtn = document.getElementById("submit-passwordBtn");
-
 submitUsernameBtn.addEventListener("click", changeUsername);
 
 async function changeUsername(event) {
@@ -461,4 +457,43 @@ async function changeUsername(event) {
   }
 }
 
-// submitPasswordBtn.addEventListener("click", changePassword)
+const currentPasswordInput = document.querySelector(".current-password");
+const newPasswordInput = document.querySelector(".new-password");
+const submitPasswordBtn = document.getElementById("submit-passwordBtn");
+
+submitPasswordBtn.addEventListener("click", changePassword);
+
+async function changePassword(event) {
+  event.preventDefault();
+  const currentPassword = currentPasswordInput.value;
+  const newPassword = newPasswordInput.value;
+  const userId = localStorage.getItem("userId");
+
+  if (!currentPassword || !newPassword) {
+    return;
+  }
+
+  const response = await fetch(
+    baseUrl + "/users/" + userId + "/change-password",
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ currentPassword, newPassword }),
+    }
+  );
+
+  const result = await response.json();
+  if (result.message == "Incorrect current password") {
+    currentPasswordInput.value = "";
+    currentPasswordInput.placeholder = "Incorrect current password";
+    newPasswordInput.value = "";
+    newPasswordInput.placeholder = "Incorrect current password";
+  } else if (result.message == "Password updated successfully") {
+    currentPasswordInput.value = "";
+    newPasswordInput.value = "";
+    currentPasswordInput.placeholder = "Password updated";
+    newPasswordInput.placeholder = "Password updated";
+  }
+}

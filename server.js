@@ -146,6 +146,26 @@ app.patch("/users/:id/change-username", async (req, res) => {
   res.json({ message: "username updated." });
 });
 
+app.patch("/users/:id/change-password", async (req, res) => {
+  const { id } = req.params;
+  const { currentPassword, newPassword } = req.body;
+
+  const user = await User.findById(id);
+  if (!user) {
+    return res.json({ message: "User not found" });
+  }
+
+  const isMatch = await bcrypt.compare(currentPassword, user.password);
+  if (!isMatch) {
+    return res.json({ message: "Incorrect current password" });
+  }
+  const salt = await bcrypt.genSalt(10);
+  const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+
+  await User.findByIdAndUpdate(id, { password: hashedNewPassword });
+  res.json({ message: "Password updated successfully" });
+});
+
 app.listen(
   port,
   console.log("✅ server has started on http://localhost:" + port)
