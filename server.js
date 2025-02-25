@@ -127,6 +127,25 @@ app.post("/login", async (req, res) => {
   res.json({ message: "login successful", userId: user._id });
 });
 
+app.patch("/users/:id/change-username", async (req, res) => {
+  const { id } = req.params;
+  const { newUsername } = req.body;
+  console.log(id);
+  console.log(newUsername);
+
+  if (!newUsername) {
+    return res.json({ message: "New username is required" });
+  }
+
+  const existingUser = await User.findOne({ username: newUsername });
+  if (existingUser) {
+    return res.json({ message: "Username is already taken." });
+  }
+
+  await User.findByIdAndUpdate(id, { username: newUsername });
+  res.json({ message: "username updated." });
+});
+
 app.listen(
   port,
   console.log("✅ server has started on http://localhost:" + port)

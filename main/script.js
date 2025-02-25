@@ -418,3 +418,47 @@ function closeChangeDetailsMenu() {
   changeDetailsMenu.style.display = "none";
   showOptions();
 }
+
+const usernameInput = document.querySelector(".new-username");
+const submitUsernameBtn = document.getElementById("submit-usernameBtn");
+
+const currentPasswordInput = document.querySelector(".current-password");
+const newPasswordInput = document.querySelector(".new-password");
+const submitPasswordBtn = document.getElementById("submit-passwordBtn");
+
+submitUsernameBtn.addEventListener("click", changeUsername);
+
+async function changeUsername(event) {
+  event.preventDefault();
+  console.log("button clickec");
+  const newUsername = usernameInput.value;
+  const userId = localStorage.getItem("userId");
+
+  if (!newUsername) {
+    return;
+  }
+
+  const response = await fetch(
+    baseUrl + "/users/" + userId + "/change-username",
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newUsername }),
+    }
+  );
+
+  const result = await response.json();
+  if (result.message == "Username is already taken.") {
+    usernameInput.value = "";
+    usernameInput.placeholder = "Username taken";
+  } else if (result.message == "username updated.") {
+    usernameInput.value = "";
+    usernameInput.placeholder = "Username Updated";
+    heading.textContent = newUsername + "'s To-Do List";
+    heading2.textContent = newUsername + "'s To-Do List";
+  }
+}
+
+// submitPasswordBtn.addEventListener("click", changePassword)

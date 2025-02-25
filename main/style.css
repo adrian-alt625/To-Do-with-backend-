@@ -15,7 +15,87 @@ body {
   height: 100vh; /* Ensures the gradient fills the whole screen */
 }
 
+.greenBtn {
+  color: rgb(255, 255, 255);
+  background: rgb(47, 228, 107);
+  width: 100px;
+  height: 50px;
+  margin: 25px;
+  margin-top: -10%;
+  margin-left: 33%;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.greenBtn:hover {
+  background: rgb(40, 192, 91);
+  border-radius: 7px;
+  color: rgb(226, 226, 226);
+}
+
+.greenBtn:active {
+  background: rgb(32, 152, 72);
+}
+
+.orangeBtn {
+  background: #febe00;
+  color: rgb(255, 255, 255);
+  width: 100px;
+  height: 50px;
+  margin: 50px;
+  margin-top: 9%;
+  margin-left: 33%;
+  margin-bottom: 45px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  display: inline-block;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.orangeBtn:hover {
+  background: #d09c00;
+  border-radius: 7px;
+  color: rgb(226, 226, 226);
+}
+.orangeBtn:active {
+  background: rgb(147, 111, 0);
+}
+
+.redBtn {
+  color: rgb(255, 255, 255);
+  background: rgb(219, 24, 24);
+  width: 100px;
+  height: 50px;
+  margin: 25px;
+  margin-top: 10px;
+  margin-left: 33%;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.redBtn:hover {
+  background: rgb(161, 33, 33);
+  border-radius: 7px;
+  color: rgb(226, 226, 226);
+}
+
+.redBtn:active {
+  background: rgb(118, 25, 25);
+}
+
 .button-container {
+  position: relative;
   display: none;
   background: rgb(255, 255, 255);
   position: absolute;
@@ -95,6 +175,7 @@ body {
 }
 
 .main-container {
+  position: relative;
   display: none;
   background: white;
   position: absolute;
@@ -510,12 +591,13 @@ body {
 }
 
 .settings-cog {
+  position: absolute;
   display: inline-block;
   vertical-align: middle;
   justify-content: center;
   align-items: center;
-  margin-left: 65px;
-  margin-top: 15px;
+  top: 20px;
+  right: 20px;
   padding: 5px;
   border: none;
   background: none;
@@ -528,12 +610,13 @@ body {
 }
 
 .settings-cog2 {
+  position: absolute;
   display: inline-block;
   vertical-align: middle;
   justify-content: center;
   align-items: center;
-  margin-left: 75px;
-  margin-top: 0;
+  top: 25px;
+  right: 20px;
   padding: 5px;
   border: none;
   background: none;
@@ -687,9 +770,9 @@ body {
   top: 50%;
   left: 50%;
   /* half height and width values */
-  margin-top: -210px;
+  margin-top: -250px;
   margin-left: -185px;
-  height: 420px;
+  height: 490px;
   width: 375px;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
@@ -774,6 +857,14 @@ body {
   background: rgb(32, 152, 72);
 }
 
+#delete-accountBtn {
+  width: 120px;
+  height: 35px;
+  margin-left: 118px;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
 /* dark mode */
 
 .dark-mode #darkBtn {
@@ -790,6 +881,36 @@ body {
 
 .dark-mode {
   background-image: linear-gradient(to right, #371d2f, #362051);
+}
+
+.dark-mode .geenBtn {
+  background: #2ba055;
+}
+.dark-mode .geenBtn:hover {
+  background: #1f7a44;
+}
+.dark-mode .geenBtn:active {
+  background: #155d34;
+}
+
+.dark-mode .orangeBtn {
+  background: #c89c00;
+}
+.dark-mode .orangeBtn:hover {
+  background: #966f00;
+}
+.dark-mode .orangeBtn:active {
+  background: #745500;
+}
+
+.dark-mode .redBtn {
+  background: #921414;
+}
+.dark-mode .redBtn:hover {
+  background: #6c0e0e;
+}
+.dark-mode .redBtn:active {
+  background: #530e0e;
 }
 
 .dark-mode .button-container {
@@ -823,6 +944,16 @@ body {
 
 .dark-mode .main-container {
   background: #202020;
+}
+
+.dark-mode .take-input {
+  background: #2ba055;
+}
+.dark-mode .take-input:hover {
+  background: #1f7a44;
+}
+.dark-mode .take-input:active {
+  background: #155d34;
 }
 
 .dark-mode .main-container h2 {
