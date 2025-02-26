@@ -593,3 +593,37 @@ function sendEmail(event) {
     }
   );
 }
+
+logoutBtn.addEventListener("click", logOut);
+function logOut() {
+  localStorage.removeItem("userId");
+  window.location.href = baseUrl;
+}
+
+// const backBtn = document.querySelector(".backBtn");
+
+// backBtn.addEventListener("click", goBack);
+// function goBack() {
+//   main.style.display = "none";
+//   btnContainer.style.display = "block";
+//   removeListItems(todosArrayName);
+// }
+
+// function removeListItems(arr) {
+//   // Get the unordered list container
+//   const ul = document.querySelector(".list");
+
+//   // Get all list items within the UL
+//   const listItems = ul.querySelectorAll("li");
+
+//   // Get the number of items to remove (based on array length)
+//   const itemsToRemove = arr.length;
+
+//   // Loop through and remove list items, starting from the last to avoid index shifting
+//   for (let i = 0; i < itemsToRemove; i++) {
+//     if (listItems[i]) {
+//       listItems[i].remove();
+//     }
+//   }
+//   todosArrayId = [];
+// }

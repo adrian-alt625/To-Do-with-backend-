@@ -118,7 +118,9 @@ body {
   margin: 20px;
   margin-left: 30px;
   margin-bottom: 0;
-  font-size: 24px;
+  font-size: 27px;
+  margin-right: 40px;
+  max-height: 50px;
 }
 
 .uploadBtn {
@@ -189,14 +191,41 @@ body {
   border-radius: 10px;
   padding-bottom: 25px;
 }
+/* 
+.backBtn {
+  position: absolute;
+  left: 17px;
+  top: 17px;
+  margin-eft: 17px; 
+  margin-bottom: 20px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  transition: 0.2s ease;
+  background: none;
+  cursor: pointer;
+  padding: 10px;
+}
 
+.backBtn:hover {
+  background-color: #ededed;
+}
+
+.backBtn img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+*/
 .main-container h2 {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 50px;
   color: rgb(163, 0, 163);
+  margin-right: 50px;
   font-size: 30px;
   margin-left: 30px;
+  margin-top: 20px;
+  margin-bottom: 0;
 }
 
 .row-input {
@@ -1303,3 +1332,10 @@ body {
 .dark-mode .close-optionsBtn:hover {
   background-color: rgb(68, 68, 68);
 }
+
+/* .dark-mode .backBtn:hover {
+  background-color: rgb(68, 68, 68);
+}
+.dark-mode .backBtn img {
+  content: url("assets/back-button/dark-mode-back-arrow.svg");
+} */
