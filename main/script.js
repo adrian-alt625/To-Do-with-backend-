@@ -418,6 +418,9 @@ closeChangeDetailsBtn.addEventListener("click", closeChangeDetailsMenu);
 function closeChangeDetailsMenu() {
   blurOverlay.style.display = "none";
   changeDetailsMenu.style.display = "none";
+  usernameInput.value = "";
+  currentPasswordInput.value = "";
+  newPasswordInput.value = "";
   showOptions();
 }
 
@@ -580,6 +583,9 @@ function sendEmail(event) {
     function (response) {
       alert("Message Sent Successfully!");
       console.log("SUCCESS!", response.status, response.text);
+      emailUserEmail.value = "";
+      emailUserMessage.value = "";
+      emailUserName.value = "";
     },
     function (error) {
       alert("Failed to send message. Please try again.");

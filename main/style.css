@@ -651,7 +651,10 @@ body {
   margin-left: 75px;
   margin-top: 15px;
   padding: 5px;
-  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 1000px;
+  border: transparent;
   background: none;
   cursor: pointer;
 }
@@ -659,6 +662,9 @@ body {
 .close-optionsBtn img {
   width: 24px;
   height: 24px;
+}
+.close-optionsBtn:hover {
+  background: #ededed;
 }
 
 .blur-overlay {
@@ -797,7 +803,10 @@ body {
   margin-left: 60px;
   margin-top: 18px;
   padding: 5px;
-  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 1000px;
+  border: transparent;
   background: none;
   cursor: pointer;
 }
@@ -805,6 +814,9 @@ body {
 .close-change-detailsBtn img {
   width: 24px;
   height: 24px;
+}
+.close-change-detailsBtn:hover {
+  background: #ededed;
 }
 
 .change-details-menu input {
@@ -933,11 +945,12 @@ body {
   justify-content: center;
   align-items: center;
   margin-left: 260px;
-  margin-top: 0px;
-  width: 24px;
-  height: 24px;
+  margin-top: 8px;
   padding: 5px;
-  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 1000px;
+  border: transparent;
   background: none;
   cursor: pointer;
 }
@@ -945,6 +958,9 @@ body {
 .close-email-formBtn img {
   width: 24px;
   height: 24px;
+}
+.close-email-formBtn:hover {
+  background: #ededed;
 }
 
 .email-form input {
@@ -1277,4 +1293,13 @@ body {
 }
 .dark-mode .close-email-formBtn img {
   content: url(assets/close-icons/white-close.svg);
+}
+.dark-mode .close-email-formBtn:hover {
+  background-color: rgb(68, 68, 68);
+}
+.dark-mode .close-change-detailsBtn:hover {
+  background-color: rgb(68, 68, 68);
+}
+.dark-mode .close-optionsBtn:hover {
+  background-color: rgb(68, 68, 68);
 }
