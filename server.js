@@ -166,6 +166,16 @@ app.patch("/users/:id/change-password", async (req, res) => {
   res.json({ message: "Password updated successfully" });
 });
 
+app.delete("/users/:id/delete-account", async (req, res) => {
+  const { id } = req.params;
+
+  const deletedUser = await User.findByIdAndDelete(id);
+  if (!deletedUser) {
+    return res.json({ message: "user not found" });
+  }
+  res.json({ message: "account deleted" });
+});
+
 app.listen(
   port,
   console.log("✅ server has started on http://localhost:" + port)

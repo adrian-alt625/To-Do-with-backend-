@@ -865,6 +865,43 @@ body {
   font-size: 14px;
 }
 
+.delete-confirmation {
+  display: none;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* half height and width values */
+  margin-top: -90px;
+  margin-left: -125px;
+  height: 170px;
+  width: 250px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  z-index: 10;
+}
+.delete-confirmation h4 {
+  position: relative;
+  background: rgb(255, 255, 255);
+  color: #a300a3;
+  margin: 20px;
+  margin-left: 32px;
+  margin-bottom: 0;
+  font-size: 24px;
+}
+.delete-confirmation button {
+  display: inline-block;
+  vertical-align: middle;
+  width: 70px;
+  height: 45px;
+  margin: 0;
+  margin-left: 20px;
+  margin-top: 25px;
+}
+#no-delete {
+  margin-left: 42px;
+}
+
 /* dark mode */
 
 .dark-mode #darkBtn {
@@ -1114,4 +1151,11 @@ body {
 }
 .dark-mode .change-details-menu form button:active {
   background: #155d34;
+}
+.dark-mode .delete-confirmation {
+  background: #202020;
+}
+.dark-mode h4 {
+  background: #202020;
+  color: #e233d9;
 }

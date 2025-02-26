@@ -397,6 +397,7 @@ function blurClicked() {
   optionsMenu.style.display = "none";
   blurOverlay.style.display = "none";
   changeDetailsMenu.style.display = "none";
+  deleteConfirmation.style.display = "none";
 }
 
 const changeDetailsMenu = document.querySelector(".change-details-menu");
@@ -495,5 +496,47 @@ async function changePassword(event) {
     newPasswordInput.value = "";
     currentPasswordInput.placeholder = "Password updated";
     newPasswordInput.placeholder = "Password updated";
+  }
+}
+
+const deleteBtn = document.getElementById("delete-accountBtn");
+const deleteConfirmation = document.querySelector(".delete-confirmation");
+const noDelete = document.getElementById("no-delete");
+const yesDelete = document.getElementById("yes-delete");
+
+deleteBtn.addEventListener("click", openConfirmation);
+
+function openConfirmation() {
+  optionsMenu.style.display = "none";
+  deleteConfirmation.style.display = "block";
+  changeDetailsMenu.style.display = "none";
+}
+
+noDelete.addEventListener("click", function () {
+  changeDetailsMenu.style.display = "block";
+  deleteConfirmation.style.display = "none";
+});
+
+yesDelete.addEventListener("click", deleteAccount);
+
+async function deleteAccount() {
+  const userId = localStorage.getItem("userId");
+
+  const response = await fetch(
+    baseUrl + "/users/" + userId + "/delete-account",
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const result = await response.json();
+  if (result.message == "account deleted") {
+    console.log("account deleted");
+    localStorage.removeItem("userId");
+    window.location.href = baseUrl;
+  } else {
+    console.log("failed to delete account");
   }
 }
