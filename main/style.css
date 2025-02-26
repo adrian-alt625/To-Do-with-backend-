@@ -902,6 +902,106 @@ body {
   margin-left: 42px;
 }
 
+.email-form {
+  display: none;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* half height and width values */
+  margin-top: -275px;
+  margin-left: -250px;
+  height: 550px;
+  width: 500px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  z-index: 10;
+}
+.email-form h3 {
+  display: inline-block;
+  vertical-align: middle;
+  background: rgb(255, 255, 255);
+  color: #a300a3;
+  margin: 20px;
+  margin-left: 30px;
+  margin-bottom: 0;
+  font-size: 24px;
+}
+.close-email-formBtn {
+  display: inline-block;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  margin-left: 260px;
+  margin-top: 0px;
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.close-email-formBtn img {
+  width: 24px;
+  height: 24px;
+}
+
+.email-form input {
+  border: none;
+  border-radius: 15px;
+  background-color: rgb(236, 236, 236);
+  margin-left: 45px;
+  height: 45px;
+  width: 275px;
+  padding-left: 20px;
+  outline: none;
+  font-size: 16px;
+  margin-top: 20px;
+  /* margin-top: 30px; */
+}
+
+.email-form input::placeholder {
+  color: #696969;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.email-form input:focus::placeholder {
+  opacity: 0;
+}
+
+.email-form textarea {
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(236, 236, 236);
+  margin-left: 45px;
+  height: 230px;
+  width: 400px;
+  padding: 10px;
+  outline: none;
+  font-size: 14px;
+  margin-top: 20px;
+  font-family: Poppins-light;
+  resize: none;
+  /* margin-top: 30px; */
+}
+
+.email-form textarea::placeholder {
+  color: #696969;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.email-form textarea:focus::placeholder {
+  opacity: 0;
+}
+#send-message {
+  width: 135px;
+  height: 45px;
+  margin-top: 13px;
+}
+
 /* dark mode */
 
 .dark-mode #darkBtn {
@@ -1158,4 +1258,23 @@ body {
 .dark-mode h4 {
   background: #202020;
   color: #e233d9;
+}
+
+.dark-mode .email-form {
+  background: #202020;
+}
+.dark-mode .email-form h3 {
+  background: #202020;
+  color: #e233d9;
+}
+.dark-mode .email-form input {
+  background-color: #4a4a4a;
+  color: white;
+}
+.dark-mode .email-form textarea {
+  background-color: #4a4a4a;
+  color: rgb(228, 228, 228);
+}
+.dark-mode .close-email-formBtn img {
+  content: url(assets/close-icons/white-close.svg);
 }

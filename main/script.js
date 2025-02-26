@@ -392,12 +392,13 @@ function closeOptions() {
   optionsMenu.style.display = "none";
   blurOverlay.style.display = "none";
 }
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function blurClicked() {
   optionsMenu.style.display = "none";
   blurOverlay.style.display = "none";
   changeDetailsMenu.style.display = "none";
   deleteConfirmation.style.display = "none";
+  emailForm.style.display = "none";
 }
 
 const changeDetailsMenu = document.querySelector(".change-details-menu");
@@ -539,4 +540,50 @@ async function deleteAccount() {
   } else {
     console.log("failed to delete account");
   }
+}
+
+const emailForm = document.querySelector(".email-form");
+const emailUserName = document.getElementById("user-name");
+const emailUserEmail = document.getElementById("user-email");
+const emailUserMessage = document.getElementById("user-message");
+const emailSendBtn = document.getElementById("send-message");
+const closeEmailFormBtn = document.querySelector(".close-email-formBtn");
+
+contactBtn.addEventListener("click", openEmailForm);
+function openEmailForm() {
+  emailForm.style.display = "block";
+}
+
+closeEmailFormBtn.addEventListener("click", closeEmailForm);
+function closeEmailForm() {
+  emailForm.style.display = "none";
+}
+
+emailSendBtn.addEventListener("click", sendEmail);
+function sendEmail(event) {
+  event.preventDefault();
+  const username = emailUserName.value;
+  const email = emailUserEmail.value;
+  const message = emailUserMessage.value;
+
+  if (!username || !email || !message) {
+    alert("Please fill in all fields.");
+    return;
+  }
+  emailjs.init("ka3O-bMMfHRbthln-");
+  const templateParams = {
+    from_name: username,
+    from_email: email,
+    message: message,
+  };
+  emailjs.send("service_ib5p6el", "template_lr20bkj", templateParams).then(
+    function (response) {
+      alert("Message Sent Successfully!");
+      console.log("SUCCESS!", response.status, response.text);
+    },
+    function (error) {
+      alert("Failed to send message. Please try again.");
+      console.log("FAILED...", error);
+    }
+  );
 }

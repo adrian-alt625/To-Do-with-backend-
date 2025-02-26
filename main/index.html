@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do List</title>
     <link rel="stylesheet" href="style.css" />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
   </head>
   <body>
     <div>
@@ -116,6 +121,20 @@
         <button id="submit-passwordBtn" type="submit">Submit</button>
       </form>
       <button id="delete-accountBtn" class="redBtn">Delete account</button>
+    </div>
+    <div class="email-form">
+      <h3>Contact Us</h3>
+      <button class="close-email-formBtn">
+        <img src="assets/close-icons/black-close.svg" />
+      </button>
+      <input type="text" id="user-name" placeholder="Your Name" required />
+      <input type="email" id="user-email" placeholder="Your Email" required />
+      <textarea
+        id="user-message"
+        placeholder="Your Message"
+        required
+      ></textarea>
+      <button id="send-message" class="orangeBtn">Send Message</button>
     </div>
     <div class="delete-confirmation">
       <h4>Delete account</h4>
