@@ -299,7 +299,6 @@ async function createAccount() {
         console.log("user ID: " + data.userId);
         changeToMainFromSignup();
         userName = username;
-        heading.textContent = userName + "'s To-Do List";
       } else {
         console.log("no user Id from backend");
       }
@@ -337,7 +336,6 @@ async function loginAccount() {
         console.log("Logged in user ID: " + data.userId);
         changeToMainFromLogin();
         userName = username;
-        heading.textContent = userName + "'s To-Do List";
       } else {
         console.log("Login failed");
         errorLogin.style.display = "block";
@@ -460,7 +458,6 @@ async function changeUsername(event) {
   } else if (result.message == "username updated.") {
     usernameInput.value = "";
     usernameInput.placeholder = "Username Updated";
-    heading.textContent = newUsername + "'s To-Do List";
     heading2.textContent = newUsername + "'s To-Do List";
   }
 }
