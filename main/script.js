@@ -66,7 +66,7 @@ function addToList() {
   if (input != "") {
     let li = document.createElement("li");
     let text = document.createTextNode(input);
-    todos.push(text.textContent);
+    todosArrayName.push(text.textContent);
     //
     postInfo(); //sending it to the backend
     //
@@ -76,7 +76,7 @@ function addToList() {
     let span = document.createElement("span");
     span.innerHTML = "&#10006";
     li.appendChild(span);
-    console.log(todos);
+    console.log(todosArrayName);
   }
 }
 
@@ -86,19 +86,22 @@ list.addEventListener("click", function (e) {
     let item = e.target.textContent;
     item = item.slice(0, -1);
     console.log(item);
-    let index = todos.indexOf(item);
+    let index = todosArrayName.indexOf(item);
     toggleCompletedDB(todosArrayId[index]);
   } else if (e.target.tagName === "SPAN") {
     let item = e.target.parentElement.textContent;
     item = item.slice(0, -1);
     console.log(item);
-    let index = todos.indexOf(item);
+    let index = todosArrayName.indexOf(item);
     if (index !== -1) {
+      console.log(todosArrayId);
+      console.log(todosArrayName);
       removeFromDB(todosArrayId[index]);
       todosArrayId.splice(index, 1);
-      todos.splice(index, 1);
+      todosArrayName.splice(index, 1);
+      console.log(todosArrayId);
+      console.log(todosArrayName);
     }
-    console.log(todos);
     e.target.parentElement.remove();
   }
 });
@@ -600,30 +603,30 @@ function logOut() {
   window.location.href = baseUrl;
 }
 
-// const backBtn = document.querySelector(".backBtn");
+const backBtn = document.querySelector(".backBtn");
 
-// backBtn.addEventListener("click", goBack);
-// function goBack() {
-//   main.style.display = "none";
-//   btnContainer.style.display = "block";
-//   removeListItems(todosArrayName);
-// }
+backBtn.addEventListener("click", goBack);
+function goBack() {
+  main.style.display = "none";
+  btnContainer.style.display = "block";
+  removeListItems(todosArrayName);
+}
 
-// function removeListItems(arr) {
-//   // Get the unordered list container
-//   const ul = document.querySelector(".list");
+function removeListItems(arr) {
+  // Get the unordered list container
+  const ul = document.querySelector(".list");
 
-//   // Get all list items within the UL
-//   const listItems = ul.querySelectorAll("li");
+  // Get all list items within the UL
+  const listItems = ul.querySelectorAll("li");
 
-//   // Get the number of items to remove (based on array length)
-//   const itemsToRemove = arr.length;
+  // Get the number of items to remove (based on array length)
+  const itemsToRemove = arr.length;
 
-//   // Loop through and remove list items, starting from the last to avoid index shifting
-//   for (let i = 0; i < itemsToRemove; i++) {
-//     if (listItems[i]) {
-//       listItems[i].remove();
-//     }
-//   }
-//   todosArrayId = [];
-// }
+  // Loop through and remove list items, starting from the last to avoid index shifting
+  for (let i = 0; i < itemsToRemove; i++) {
+    if (listItems[i]) {
+      listItems[i].remove();
+    }
+  }
+  todosArrayId = [];
+}
