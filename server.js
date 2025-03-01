@@ -4,6 +4,7 @@ const port = 2000;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
+
 app.use(cors());
 
 require("dotenv").config();
@@ -23,7 +24,7 @@ app.use(express.json());
 const todoSchema = new mongoose.Schema({
   task: { type: String, required: true }, // Task name (required)
   completed: { type: Boolean, default: false }, // Completion status (default: false)
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  listId: { type: mongoose.Schema.Types.ObjectId, ref: "List", required: true },
 });
 
 // Create and export the Todo model
@@ -193,7 +194,20 @@ app.post("/lists", async (req, res) => {
     userId,
   });
   await newList.save();
-  res.json({ message: "new list created " });
+  res.json({
+    message: "new list created ",
+    listId: newList._id,
+    listName: listName,
+  });
+});
+
+app.get("/lists/:id", async (req, res) => {
+  const { id } = req.params;
+  const lists = await Lists.find({
+    userId: new mongoose.Types.ObjectId(id),
+  });
+  console.log(id);
+  res.json(lists);
 });
 
 app.listen(

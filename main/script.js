@@ -96,7 +96,29 @@ async function createList() {
     });
     let result = await response.json();
     console.log(result);
+    change();
   }
+}
+
+const dropdown = document.querySelector("#listDropdown");
+
+upload.addEventListener("click", loadLists);
+async function loadLists() {
+  const userId = localStorage.getItem("userId");
+  let response = await fetch(baseUrl + "/lists/" + userId, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json", // the type of file (json)
+    },
+  });
+  let result = await response.json();
+  const listNames = result.map((list) => list.listName);
+  listNames.forEach((name) => {
+    const option = document.createElement("option");
+    option.value = name.toLowerCase().replace(/\s+/g, "-"); // Set value (formatted)
+    option.textContent = name; // Set display text
+    dropdown.appendChild(option);
+  });
 }
 
 // make a function that removes the "startup" elements and adds the to-do-list elements
@@ -106,6 +128,7 @@ function change() {
   //adding new elements
   main.style.display = "block";
   heading2.textContent = userName + "'s To-Do List";
+  createMenu.style.display = "none";
 }
 
 add.addEventListener("click", addToList);
