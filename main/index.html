@@ -17,12 +17,12 @@
     </div>
     <div class="login-signup-container">
       <h3 class="heading0">To-Do List</h3>
-      <button class="loginBtn">Login</button>
-      <button class="signupBtn">Signup</button>
+      <button class="orangeBtn" id="loginBtn">Login</button>
+      <button class="greenBtn" id="signupBtn">Signup</button>
     </div>
     <!--  -->
     <div class="login-page">
-      <button class="backArrowBtn">
+      <button id="back-to-login-signup" class="backArrowBtn">
         <img src="assets/back-button/black_back_arrow.svg" />
       </button>
       <input
@@ -36,10 +36,10 @@
         placeholder="Enter password"
       />
       <p class="incorrect-details">incorrect login details</p>
-      <button class="submit-loginBtn">Login</button>
+      <button class="orangeBtn" id="submit-loginBtn">Login</button>
     </div>
     <div class="signup-page">
-      <button class="backArrowBtn">
+      <button id="back-to-login-signup" class="backArrowBtn">
         <img src="assets/back-button/black_back_arrow.svg" />
       </button>
       <input
@@ -52,7 +52,7 @@
         type="password"
         placeholder="Enter password"
       />
-      <button class="submit-signupBtn">Signup</button>
+      <button class="greenBtn" id="submit-signupBtn">Signup</button>
     </div>
     <!--  -->
     <div class="button-container">
@@ -60,8 +60,8 @@
       <button class="settings-cog">
         <img src="assets/settings cog/grey-settings-gear-22621.svg" />
       </button>
-      <button class="uploadBtn">Load</button>
-      <button class="createBtn">Create</button>
+      <button class="orangeBtn" id="uploadBtn">Load</button>
+      <button class="greenBtn" id="createBtn">Create</button>
     </div>
     <div class="main-container">
       <button class="backBtn">
@@ -73,7 +73,7 @@
       </button>
       <div class="row-input">
         <input class="input" "text" placeholder="Enter a To-Do" />
-        <button class="take-input">Add</button>
+        <button class="greenBtn" id="take-input">Add</button>
       </div>
       <div class="list-container">
         <ul class="list">
@@ -87,9 +87,9 @@
       <button class="close-optionsBtn">
         <img src="assets/close-icons/black-close.svg" />
       </button>
-      <button class="profileBtn">Profile</button>
-      <button class="contactBtn">Contact</button>
-      <button class="log-outBtn">Log out</button>
+      <button class="orangeBtn" id="profileBtn">Profile</button>
+      <button class="greenBtn" id="contactBtn">Contact</button>
+      <button class="redBtn" id="log-outBtn">Log out</button>
     </div>
     <div class="change-details-menu">
       <h3>Change Details</h3>
@@ -143,6 +143,14 @@
       <h4>Delete account</h4>
       <button class="orangeBtn" id="no-delete">No</button>
       <button class="redBtn" id="yes-delete">Yes</button>
+    </div>
+    <div class="create-list-menu">
+      <button id="back-from-create-list" class="backArrowBtn">
+        <img src="assets/back-button/black_back_arrow.svg" />
+      </button>
+      <h3>Create new list</h3>
+      <input type="text" placeholder="List name" />
+      <button class="greenBtn" id="create-listBtn">Create</button>
     </div>
     <div class="blur-overlay"></div>
     <script src="script.js" defer></script>

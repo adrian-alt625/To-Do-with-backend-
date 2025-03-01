@@ -123,57 +123,16 @@ body {
   max-height: 50px;
 }
 
-.uploadBtn {
-  background: #febe00;
-  color: rgb(255, 255, 255);
-  width: 100px;
-  height: 50px;
-  margin: 50px;
+#uploadBtn {
   margin-top: 9%;
   margin-left: 36%;
   margin-bottom: 45px;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-  display: inline-block;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-.uploadBtn:hover {
-  background: #d09c00;
-  border-radius: 7px;
-  color: rgb(226, 226, 226);
-}
-.uploadBtn:active {
-  background: rgb(147, 111, 0);
 }
 
-.createBtn {
-  color: rgb(255, 255, 255);
-  background: rgb(47, 228, 107);
-  width: 100px;
-  height: 50px;
+#createBtn {
   margin: 25px;
   margin-top: -10%;
   margin-left: 36%;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-.createBtn:hover {
-  background: rgb(40, 192, 91);
-  border-radius: 7px;
-  color: rgb(226, 226, 226);
-}
-
-.createBtn:active {
-  background: rgb(32, 152, 72);
 }
 
 .main-container {
@@ -252,25 +211,14 @@ body {
   opacity: 0;
 }
 
-.take-input {
-  color: rgb(255, 255, 255);
-  background: rgb(47, 228, 107);
+#take-input {
   height: 47px;
   width: 80px;
   margin-left: 10px;
   font-size: 15px;
   font-weight: bold;
   border-radius: 16px;
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-}
-.take-input:hover {
-  background: rgb(40, 192, 91);
-  border-radius: 13px;
-  color: rgb(226, 226, 226);
-}
-.take-input:active {
-  background: rgb(32, 152, 72);
+  margin-bottom: 0;
 }
 
 .list li {
@@ -385,57 +333,12 @@ body {
   font-size: 24px;
 }
 
-.loginBtn {
-  background: #febe00;
-  color: rgb(255, 255, 255);
-  width: 100px;
-  height: 50px;
-  margin: 50px;
+#loginBtn {
   margin-top: 12%;
-  margin-left: 33%;
-  margin-bottom: 45px;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-  display: inline-block;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-.loginBtn:hover {
-  background: #d09c00;
-  border-radius: 7px;
-  color: rgb(226, 226, 226);
-}
-.loginBtn:active {
-  background: rgb(147, 111, 0);
 }
 
-.signupBtn {
-  color: rgb(255, 255, 255);
-  background: rgb(47, 228, 107);
-  width: 100px;
-  height: 50px;
-  margin: 25px;
+#signupBtn {
   margin-top: -10%;
-  margin-left: 33%;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-.signupBtn:hover {
-  background: rgb(40, 192, 91);
-  border-radius: 7px;
-  color: rgb(226, 226, 226);
-}
-
-.signupBtn:active {
-  background: rgb(32, 152, 72);
 }
 
 .login-page {
@@ -484,31 +387,10 @@ body {
   margin-top: 30px;
 }
 
-.submit-loginBtn {
-  background: #febe00;
-  color: rgb(255, 255, 255);
-  width: 100px;
-  height: 50px;
-  margin: 50px;
+#submit-loginBtn {
   margin-top: 9%;
   margin-left: 33%;
   margin-bottom: 45px;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-  display: inline-block;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-.submit-loginBtn:hover {
-  background: #d09c00;
-  border-radius: 7px;
-  color: rgb(226, 226, 226);
-}
-.submit-loginBtn:active {
-  background: rgb(147, 111, 0);
 }
 
 .signup-page {
@@ -558,31 +440,10 @@ body {
   margin-top: 30px;
 }
 
-.submit-signupBtn {
-  background: rgb(47, 228, 107);
-  color: rgb(255, 255, 255);
-  width: 100px;
-  height: 50px;
-  margin: 50px;
+#submit-signupBtn {
   margin-top: 9%;
   margin-left: 33%;
   margin-bottom: 45px;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-  display: inline-block;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-.submit-signupBtn:hover {
-  background: rgb(40, 192, 91);
-  border-radius: 7px;
-  color: rgb(226, 226, 226);
-}
-.submit-signupBtn:active {
-  background: rgb(32, 152, 72);
 }
 
 .incorrect-details {
@@ -717,83 +578,22 @@ body {
   font-size: 24px;
 }
 
-.profileBtn {
-  background: #febe00;
-  color: rgb(255, 255, 255);
-  width: 100px;
-  height: 50px;
-  margin: 50px;
+#profileBtn {
   margin-top: 12%;
   margin-left: 33%;
   margin-bottom: 45px;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-  display: inline-block;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-.profileBtn:hover {
-  background: #d09c00;
-  border-radius: 7px;
-  color: rgb(226, 226, 226);
-}
-.profileBtn:active {
-  background: rgb(147, 111, 0);
 }
 
-.contactBtn {
-  color: rgb(255, 255, 255);
-  background: rgb(47, 228, 107);
-  width: 100px;
-  height: 50px;
+#contactBtn {
   margin: 25px;
   margin-top: -10%;
   margin-left: 33%;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-.contactBtn:hover {
-  background: rgb(40, 192, 91);
-  border-radius: 7px;
-  color: rgb(226, 226, 226);
 }
 
-.contactBtn:active {
-  background: rgb(32, 152, 72);
-}
-
-.log-outBtn {
-  color: rgb(255, 255, 255);
-  background: rgb(219, 24, 24);
-  width: 100px;
-  height: 50px;
+#log-outBtn {
   margin: 25px;
   margin-top: 10px;
   margin-left: 33%;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-.log-outBtn:hover {
-  background: rgb(161, 33, 33);
-  border-radius: 7px;
-  color: rgb(226, 226, 226);
-}
-
-.log-outBtn:active {
-  background: rgb(118, 25, 25);
 }
 
 .change-details-menu {
@@ -1045,6 +845,64 @@ body {
   margin-top: 13px;
 }
 
+.create-list-menu {
+  display: none;
+  background: rgb(255, 255, 255);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  /* half height and width values */
+  margin-top: -145px;
+  margin-left: -175px;
+  height: 275px;
+  width: 350px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding-top: 15px;
+}
+
+#back-from-create-list {
+  margin-bottom: 0;
+}
+
+.create-list-menu h3 {
+  background: rgb(255, 255, 255);
+  color: #a300a3;
+  margin: 20px;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 24px;
+}
+
+.create-list-menu input {
+  border: none;
+  border-radius: 15px;
+  background-color: rgb(236, 236, 236);
+  margin-left: 45px;
+  height: 45px;
+  width: 225px;
+  padding-left: 20px;
+  outline: none;
+  font-size: 16px;
+  margin-top: 20px;
+  /* margin-top: 30px; */
+}
+
+.create-list-menu input::placeholder {
+  color: #696969;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.create-list-menu input:focus::placeholder {
+  opacity: 0;
+}
+
+#create-listBtn {
+  margin-top: 35px;
+}
+
 /* dark mode */
 
 .dark-mode #darkBtn {
@@ -1063,13 +921,13 @@ body {
   background-image: linear-gradient(to right, #371d2f, #362051);
 }
 
-.dark-mode .geenBtn {
+.dark-mode .greenBtn {
   background: #2ba055;
 }
-.dark-mode .geenBtn:hover {
+.dark-mode .greenBtn:hover {
   background: #1f7a44;
 }
-.dark-mode .geenBtn:active {
+.dark-mode .greenBtn:active {
   background: #155d34;
 }
 
@@ -1102,38 +960,8 @@ body {
   color: #e233d9;
 }
 
-.dark-mode .uploadBtn {
-  background: #c89c00;
-}
-.dark-mode .uploadBtn:hover {
-  background: #966f00;
-}
-.dark-mode .uploadBtn:active {
-  background: #745500;
-}
-
-.dark-mode .createBtn {
-  background: #2ba055;
-}
-.dark-mode .createBtn:hover {
-  background: #1f7a44;
-}
-.dark-mode .createBtn:active {
-  background: #155d34;
-}
-
 .dark-mode .main-container {
   background: #202020;
-}
-
-.dark-mode .take-input {
-  background: #2ba055;
-}
-.dark-mode .take-input:hover {
-  background: #1f7a44;
-}
-.dark-mode .take-input:active {
-  background: #155d34;
 }
 
 .dark-mode .main-container h2 {
@@ -1165,41 +993,12 @@ body {
   color: #e233d9;
 }
 
-.dark-mode .loginBtn {
-  background: #c89c00;
-}
-.dark-mode .loginBtn:hover {
-  background: #966f00;
-}
-.dark-mode .loginBtn:active {
-  background: #745500;
-}
-
-.dark-mode .signupBtn {
-  background: #2ba055;
-}
-.dark-mode .signupBtn:hover {
-  background: #1f7a44;
-}
-.dark-mode .signupBtn:active {
-  background: #155d34;
-}
-
 .dark-mode .login-page {
   background: #202020;
 }
 .dark-mode .login-page input {
   background-color: #4a4a4a;
   color: white;
-}
-.dark-mode .submit-loginBtn {
-  background: #c89c00;
-}
-.dark-mode .submit-loginBtn:hover {
-  background: #966f00;
-}
-.dark-mode .submit-loginBtn:active {
-  background: #745500;
 }
 
 .dark-mode .signup-page {
@@ -1209,15 +1008,7 @@ body {
   background-color: #4a4a4a;
   color: white;
 }
-.dark-mode .submit-signupBtn {
-  background: #2ba055;
-}
-.dark-mode .submit-signupBtn:hover {
-  background: #1f7a44;
-}
-.dark-mode .submit-signupBtn:active {
-  background: #155d34;
-}
+
 .dark-mode .incorrect-details {
   color: rgb(180, 180, 180);
 }
@@ -1239,35 +1030,6 @@ body {
 .dark-mode .options-menu h3 {
   background: #202020;
   color: #e233d9;
-}
-.dark-mode .profileBtn {
-  background: #c89c00;
-}
-.dark-mode .profileBtn:hover {
-  background: #966f00;
-}
-.dark-mode .profileBtn:active {
-  background: #745500;
-}
-
-.dark-mode .contactBtn {
-  background: #2ba055;
-}
-.dark-mode .contactBtn:hover {
-  background: #1f7a44;
-}
-.dark-mode .contactBtn:active {
-  background: #155d34;
-}
-
-.dark-mode .log-outBtn {
-  background: #921414;
-}
-.dark-mode .log-outBtn:hover {
-  background: #6c0e0e;
-}
-.dark-mode .log-outBtn:active {
-  background: #530e0e;
 }
 
 .dark-mode .change-details-menu {
@@ -1336,4 +1098,16 @@ body {
 }
 .dark-mode .backBtn img {
   content: url("assets/back-button/dark-mode-back-arrow.svg");
+}
+
+.dark-mode .create-list-menu {
+  background: #202020;
+}
+.dark-mode .create-list-menu h3 {
+  background: #202020;
+  color: #e233d9;
+}
+.dark-mode .create-list-menu input {
+  background-color: #4a4a4a;
+  color: white;
 }

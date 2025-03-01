@@ -3,11 +3,11 @@
 
 //assigning values for the "upload button" and the file input
 const fileInput = document.querySelector(".fileInput");
-const upload = document.querySelector(".uploadBtn");
-const create = document.querySelector(".createBtn");
+const upload = document.querySelector("#uploadBtn");
+const create = document.querySelector("#createBtn");
 const btnContainer = document.querySelector(".button-container");
 const heading = document.querySelector(".heading");
-const add = document.querySelector(".take-input");
+const add = document.querySelector("#take-input");
 const main = document.querySelector(".main-container");
 const heading2 = document.querySelector(".heading2");
 const mainInput = document.querySelector(".input");
@@ -45,9 +45,20 @@ async function readFile() {
   // };
 }
 
-// calls the "change" function when "create" button is clicked
-create.addEventListener("click", change);
-create.addEventListener("click", clearDB);
+const createMenu = document.querySelector(".create-list-menu");
+const backFromCreateList = document.querySelector("#back-from-create-list");
+
+create.addEventListener("click", openCreateWindow);
+function openCreateWindow() {
+  btnContainer.style.display = "none";
+  createMenu.style.display = "block";
+}
+
+backFromCreateList.addEventListener("click", backFromCreate);
+function backFromCreate() {
+  btnContainer.style.display = "block";
+  createMenu.style.display = "none";
+}
 
 // make a function that removes the "startup" elements and adds the to-do-list elements
 function change() {
@@ -232,27 +243,19 @@ async function getTodoStatus(id) {
   return todo.completed;
 }
 
-async function clearDB() {
-  const userId = getCurrentUserId();
-  let response = await fetch(`${baseUrl}/todos?userId=${userId}`, {
-    method: "DELETE",
-  });
-  console.log("todos for currently logged in user deleted");
-}
-
 //code starting for all things related to login/signup
 const buttonContainer = document.querySelector(".button-container");
 const loginSignupContainer = document.querySelector(".login-signup-container");
-const loginOptionBtn = document.querySelector(".loginBtn");
-const signupOptionBtn = document.querySelector(".signupBtn");
+const loginOptionBtn = document.querySelector("#loginBtn");
+const signupOptionBtn = document.querySelector("#signupBtn");
 const loginPage = document.querySelector(".login-page");
 const signupPage = document.querySelector(".signup-page");
 const signupUsername = document.querySelector(".input-username-signup");
 const signupPassword = document.querySelector(".input-password-signup");
-const submitSignup = document.querySelector(".submit-signupBtn");
+const submitSignup = document.querySelector("#submit-signupBtn");
 const loginUsername = document.querySelector(".input-username-login");
 const loginPassword = document.querySelector(".input-password-login");
-const submitLogin = document.querySelector(".submit-loginBtn");
+const submitLogin = document.querySelector("#submit-loginBtn");
 
 loginOptionBtn.addEventListener("click", changeToLogin);
 signupOptionBtn.addEventListener("click", changeToSignup);
@@ -348,7 +351,7 @@ async function loginAccount() {
 
 submitLogin.addEventListener("click", loginAccount);
 
-const backButtons = document.querySelectorAll(".backArrowBtn");
+const backButtons = document.querySelectorAll("#back-to-login-signup");
 
 // Attach event listeners to each button
 backButtons.forEach((backButton) => {
@@ -373,9 +376,9 @@ const settingsCog = document.querySelector(".settings-cog");
 const settingsCog2 = document.querySelector(".settings-cog2");
 const optionsMenu = document.querySelector(".options-menu");
 const closeOptionsBtn = document.querySelector(".close-optionsBtn");
-const profileBtn = document.querySelector(".profileBtn");
-const contactBtn = document.querySelector(".contactBtn");
-const logoutBtn = document.querySelector(".log-outBtn");
+const profileBtn = document.querySelector("#profileBtn");
+const contactBtn = document.querySelector("#contactBtn");
+const logoutBtn = document.querySelector("#log-outBtn");
 const blurOverlay = document.querySelector(".blur-overlay");
 
 settingsCog.addEventListener("click", showOptions);
