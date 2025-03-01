@@ -103,9 +103,9 @@ body {
   left: 50%;
   /* half height and width values */
   margin-top: -135px;
-  margin-left: -200px;
+  margin-left: -175px;
   height: 275px;
-  width: 400px;
+  width: 350px;
   background-color: white;
   border-radius: 10px;
 }
@@ -1159,4 +1159,5 @@ body {
 }
 .dark-mode #listDropdown {
   background: #4a4a4a;
+  color: white;
 }

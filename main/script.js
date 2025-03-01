@@ -47,6 +47,7 @@ async function readFile() {
 
 const createMenu = document.querySelector(".create-list-menu");
 const backFromCreateList = document.querySelector("#back-from-create-list");
+const listNameInput = document.querySelector("#new-list-name");
 
 create.addEventListener("click", openCreateWindow);
 function openCreateWindow() {
@@ -56,8 +57,9 @@ function openCreateWindow() {
 
 backFromCreateList.addEventListener("click", backFromCreate);
 function backFromCreate() {
-  btnContainer.style.display = "block";
+  listNameInput.value = "";
   createMenu.style.display = "none";
+  btnContainer.style.display = "block";
 }
 
 const loadMenu = document.querySelector(".load-lists-menu");
@@ -71,8 +73,30 @@ function openLoadMenu() {
 
 backFromLoadList.addEventListener("click", backFromLoad);
 function backFromLoad() {
-  btnContainer.style.display = "block";
   loadMenu.style.display = "none";
+  btnContainer.style.display = "block";
+}
+
+const createListBtn = document.querySelector("#create-listBtn");
+const newListNameInput = document.querySelector("#new-list-name");
+
+createListBtn.addEventListener("click", createList);
+
+async function createList() {
+  if (newListNameInput.value !== "") {
+    let response = await fetch(baseUrl + "/lists", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // the type of file (json)
+      },
+      body: JSON.stringify({
+        listName: newListNameInput.value,
+        userId: localStorage.getItem("userId"),
+      }),
+    });
+    let result = await response.json();
+    console.log(result);
+  }
 }
 
 // make a function that removes the "startup" elements and adds the to-do-list elements

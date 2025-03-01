@@ -149,7 +149,7 @@
         <img src="assets/back-button/black_back_arrow.svg" />
       </button>
       <h3>Create new list</h3>
-      <input type="text" placeholder="List name" />
+      <input id="new-list-name" type="text" placeholder="List name" />
       <button class="greenBtn" id="create-listBtn">Create</button>
     </div>
     <div class="load-lists-menu">
@@ -157,7 +157,9 @@
         <img src="assets/back-button/black_back_arrow.svg" />
       </button>
       <h3>Select list</h3>
-      <select id="listDropdown"></select>
+      <select id="listDropdown">
+        <option value="">Select</option>
+      </select>
       <button id="load-selected-list" class="orangeBtn">Load</button>
     </div>
     <div class="blur-overlay"></div>

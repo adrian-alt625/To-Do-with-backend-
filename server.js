@@ -28,7 +28,6 @@ const todoSchema = new mongoose.Schema({
 
 // Create and export the Todo model
 const Todo = mongoose.model("Todo", todoSchema);
-
 module.exports = Todo;
 
 app.get("/todo", async (req, res) => {
@@ -174,6 +173,27 @@ app.delete("/users/:id/delete-account", async (req, res) => {
     return res.json({ message: "user not found" });
   }
   res.json({ message: "account deleted" });
+});
+
+const listSchema = new mongoose.Schema({
+  listName: { type: String, required: true }, // Task name (required)
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+});
+const Lists = mongoose.model("List", listSchema);
+module.exports = Lists;
+
+app.post("/lists", async (req, res) => {
+  const { listName, userId } = req.body;
+  if (!listName || !userId) {
+    return res.json({ error: "listname or userId is missing " });
+  }
+
+  const newList = new Lists({
+    listName,
+    userId,
+  });
+  await newList.save();
+  res.json({ message: "new list created " });
 });
 
 app.listen(
