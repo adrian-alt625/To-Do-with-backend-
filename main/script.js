@@ -17,7 +17,7 @@ const darkMode = document.querySelector(".dark-mode");
 const errorLogin = document.querySelector(".incorrect-details");
 let todos = [];
 //initiating file input (through file explorer) once the "upload" button is pressed
-upload.addEventListener("click", openFE);
+// upload.addEventListener("click", openFE);
 //what happens when "upload" button is pressed
 function openFE() {
   console.log("hello world");
@@ -58,6 +58,21 @@ backFromCreateList.addEventListener("click", backFromCreate);
 function backFromCreate() {
   btnContainer.style.display = "block";
   createMenu.style.display = "none";
+}
+
+const loadMenu = document.querySelector(".load-lists-menu");
+const backFromLoadList = document.querySelector("#back-from-load-list");
+
+upload.addEventListener("click", openLoadMenu);
+function openLoadMenu() {
+  btnContainer.style.display = "none";
+  loadMenu.style.display = "block";
+}
+
+backFromLoadList.addEventListener("click", backFromLoad);
+function backFromLoad() {
+  btnContainer.style.display = "block";
+  loadMenu.style.display = "none";
 }
 
 // make a function that removes the "startup" elements and adds the to-do-list elements

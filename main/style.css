@@ -903,6 +903,44 @@ body {
   margin-top: 35px;
 }
 
+.load-lists-menu {
+  display: none;
+  background: rgb(255, 255, 255);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  /* half height and width values */
+  margin-top: -145px;
+  margin-left: -175px;
+  height: 275px;
+  width: 350px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding-top: 15px;
+}
+.load-lists-menu h3 {
+  background: rgb(255, 255, 255);
+  color: #a300a3;
+  margin: 20px;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 24px;
+}
+#listDropdown {
+  margin-top: 20px;
+  margin-left: 50px;
+  border-radius: 8px;
+  width: 225px;
+  height: 40px;
+  background-color: #ececec;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#load-selected-list {
+  margin-top: 45px;
+}
 /* dark mode */
 
 .dark-mode #darkBtn {
@@ -1110,4 +1148,15 @@ body {
 .dark-mode .create-list-menu input {
   background-color: #4a4a4a;
   color: white;
+}
+
+.dark-mode .load-lists-menu {
+  background: #202020;
+}
+.dark-mode .load-lists-menu h3 {
+  background: #202020;
+  color: #e233d9;
+}
+.dark-mode #listDropdown {
+  background: #4a4a4a;
 }
