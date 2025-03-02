@@ -32,19 +32,19 @@ const Todo = mongoose.model("Todo", todoSchema);
 module.exports = Todo;
 
 app.get("/todo", async (req, res) => {
-  const { userId } = req.query;
-  if (!userId) {
-    return res.json({ message: "user ID not found " });
+  const { listId } = req.query;
+  if (!listId) {
+    return res.json({ message: "list ID not found " });
   }
-  const oldTodos = await Todo.find({ userId });
+  const oldTodos = await Todo.find({ listId });
   res.json(oldTodos);
 });
 
 app.post("/todos", async (req, res) => {
-  const { task, completed, userId } = req.body;
-  console.log({ task, completed, userId });
+  const { task, completed, listId } = req.body;
+  console.log({ task, completed, listId });
   // res.send({ status: "recieved" });
-  const newTodo = new Todo({ task, completed, userId });
+  const newTodo = new Todo({ task, completed, listId });
   const savedTodo = await newTodo.save();
   console.log("Saved To-Do: " + savedTodo);
   res.json(savedTodo);
@@ -206,8 +206,21 @@ app.get("/lists/:id", async (req, res) => {
   const lists = await Lists.find({
     userId: new mongoose.Types.ObjectId(id),
   });
-  console.log(id);
   res.json(lists);
+});
+
+app.get("/todos/list/:listId", async (req, res) => {
+  const { listId } = req.params;
+
+  try {
+    const todos = await Todo.find({
+      listId: new mongoose.Types.ObjectId(listId),
+    });
+    res.json(todos);
+  } catch (error) {
+    console.error("Error fetching todos:", error);
+    res.status(500).json({ message: "Error fetching todos" });
+  }
 });
 
 app.listen(

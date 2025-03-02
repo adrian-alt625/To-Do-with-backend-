@@ -26,24 +26,6 @@ function openFE() {
 
 //calls the "readFile" function when a file is uploaded
 //reading the file, creating an array where each line is stored seperately in an array
-async function readFile() {
-  // let reader = new FileReader();
-
-  // reader.readAsText(fileInput.files[0]);
-
-  // reader.onload = function () {
-  //   let text = reader.result;
-
-  //   text = text.split("\n");
-  //   text = text.map((line) => line.trim());
-  //   console.log(text);
-  change();
-  // addFromFile(text);
-  await loadTodos();
-  addFromFile(todosArrayName);
-
-  // };
-}
 
 const createMenu = document.querySelector(".create-list-menu");
 const backFromCreateList = document.querySelector("#back-from-create-list");
@@ -75,6 +57,11 @@ backFromLoadList.addEventListener("click", backFromLoad);
 function backFromLoad() {
   loadMenu.style.display = "none";
   btnContainer.style.display = "block";
+  for (let i = dropdown.options.length - 1; i >= 0; i--) {
+    if (dropdown.options[i].value !== "") {
+      dropdown.remove(i);
+    }
+  }
 }
 
 const createListBtn = document.querySelector("#create-listBtn");
@@ -96,7 +83,7 @@ async function createList() {
     });
     let result = await response.json();
     console.log(result);
-    change();
+    loadEditorWithList(result.listId, result.listName);
   }
 }
 
@@ -112,13 +99,53 @@ async function loadLists() {
     },
   });
   let result = await response.json();
-  const listNames = result.map((list) => list.listName);
-  listNames.forEach((name) => {
+  console.log(result);
+  result.forEach((list) => {
     const option = document.createElement("option");
-    option.value = name.toLowerCase().replace(/\s+/g, "-"); // Set value (formatted)
-    option.textContent = name; // Set display text
+    option.value = list._id; // Store the list ID
+    option.textContent = list.listName; // Set display text
     dropdown.appendChild(option);
   });
+}
+
+const loadListBtn = document.querySelector("#load-selected-list");
+loadListBtn.addEventListener("click", function () {
+  let selectedValue = dropdown.value;
+  let selectedText = dropdown.options[dropdown.selectedIndex].text;
+  loadEditorWithList(selectedValue, selectedText);
+});
+
+async function loadEditorWithList(listId, listName) {
+  localStorage.setItem("listId", listId);
+  loadMenu.style.display = "none";
+  createMenu.style.display = "none";
+  main.style.display = "block";
+  heading2.textContent = listName;
+  loadTodosByList(listId);
+}
+
+async function loadTodosByList(listId) {
+  if (!listId) return console.error("List ID is missing");
+
+  try {
+    let response = await fetch(baseUrl + "/todos/list/" + listId, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    let todos = await response.json();
+    const todoTasks = todos.map((todo) => todo.task);
+    const todoId = todos.map((todo) => todo._id);
+    todosArrayName = todoTasks;
+    todosArrayId = todoId;
+    console.log(todosArrayName);
+    console.log(todosArrayId);
+    addFromFile(todosArrayName);
+
+    // Handle the todos (e.g., display them in the UI)
+  } catch (error) {
+    console.error("Error fetching todos:", error);
+  }
 }
 
 // make a function that removes the "startup" elements and adds the to-do-list elements
@@ -229,7 +256,6 @@ const baseUrl = "http://localhost:2000";
 
 async function postInfo() {
   const userId = getCurrentUserId();
-  console.log(userId);
   let response = await fetch(baseUrl + "/todos", {
     method: "POST",
     headers: {
@@ -238,7 +264,7 @@ async function postInfo() {
     body: JSON.stringify({
       task: mainInput.value,
       completed: false,
-      userId: getCurrentUserId(),
+      listId: localStorage.getItem("listId"),
     }),
   });
   let newTodo = await response.json(); // Get the newly created todo object
@@ -251,12 +277,12 @@ let todosArrayName = [];
 let todosArrayId = [];
 
 async function fetchTodos() {
-  const userId = getCurrentUserId();
-  if (!userId) {
-    console.log("no userId found");
+  const listId = localStorage.getItem("listId");
+  if (!listId) {
+    console.log("no listId found");
     return [];
   }
-  let response = await fetch(`${baseUrl}/todo?userId=${userId}`);
+  let response = await fetch(`${baseUrl}/todo?listId=${listId}`);
   let todos = await response.json();
   console.log("Fetched Todos: ", todos);
   return todos;
@@ -662,6 +688,7 @@ function sendEmail(event) {
 logoutBtn.addEventListener("click", logOut);
 function logOut() {
   localStorage.removeItem("userId");
+  localStorage.removeItem("listId");
   window.location.href = baseUrl;
 }
 
@@ -671,6 +698,12 @@ backBtn.addEventListener("click", goBack);
 function goBack() {
   main.style.display = "none";
   btnContainer.style.display = "block";
+  for (let i = dropdown.options.length - 1; i >= 0; i--) {
+    if (dropdown.options[i].value !== "") {
+      dropdown.remove(i);
+    }
+  }
+  localStorage.removeItem("listId");
   removeListItems(todosArrayName);
 }
 
