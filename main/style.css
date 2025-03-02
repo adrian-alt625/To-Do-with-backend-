@@ -456,6 +456,16 @@ body {
   color: rgb(31, 31, 31);
 }
 
+.username-taken {
+  display: none;
+  font-size: 12px;
+  font-weight: 100;
+  margin-top: 10px;
+  margin-left: 40px;
+  margin-bottom: -10px;
+  color: rgb(31, 31, 31);
+}
+
 .backArrowBtn {
   margin-left: 17px;
   border-radius: 50%;
@@ -1050,6 +1060,10 @@ body {
 .dark-mode .incorrect-details {
   color: rgb(180, 180, 180);
 }
+.dark-mode .username-taken {
+  color: rgb(180, 180, 180);
+}
+
 .dark-mode .backArrowBtn:hover {
   background-color: rgb(68, 68, 68);
 }

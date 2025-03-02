@@ -369,6 +369,8 @@ function changeToMainFromSignup() {
 
 let userName;
 
+const usernameTaken = document.querySelector(".username-taken");
+
 //signing up
 async function createAccount() {
   const username = signupUsername.value;
@@ -392,6 +394,7 @@ async function createAccount() {
         userName = username;
       } else {
         console.log("no user Id from backend");
+        usernameTaken.style.display = "block";
       }
     } catch (error) {
       console.log("Error:", error);
@@ -450,6 +453,7 @@ backButtons.forEach((backButton) => {
     // Check if the parent div is found and hide it
     if (parentDiv) {
       errorLogin.style.display = "none";
+      usernameTaken.style.display = "none";
       signupUsername.value = "";
       signupPassword.value = "";
       loginPassword.value = "";
