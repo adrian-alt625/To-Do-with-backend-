@@ -111,40 +111,45 @@ async function loadLists() {
 const loadListBtn = document.querySelector("#load-selected-list");
 loadListBtn.addEventListener("click", function () {
   let selectedValue = dropdown.value;
+  console.log(selectedValue);
   let selectedText = dropdown.options[dropdown.selectedIndex].text;
-  loadEditorWithList(selectedValue, selectedText);
+  if (selectedValue !== "") {
+    loadEditorWithList(selectedValue, selectedText);
+  }
 });
 
 async function loadEditorWithList(listId, listName) {
-  localStorage.setItem("listId", listId);
-  loadMenu.style.display = "none";
-  createMenu.style.display = "none";
-  main.style.display = "block";
-  heading2.textContent = listName;
-  loadTodosByList(listId);
+  if (listId !== "" || listName !== "") {
+    localStorage.setItem("listId", listId);
+    loadMenu.style.display = "none";
+    createMenu.style.display = "none";
+    main.style.display = "block";
+    heading2.textContent = listName;
+    loadTodosByList(listId);
+  }
 }
 
 async function loadTodosByList(listId) {
-  if (!listId) return console.error("List ID is missing");
+  if (listId !== "") {
+    try {
+      let response = await fetch(baseUrl + "/todos/list/" + listId, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
 
-  try {
-    let response = await fetch(baseUrl + "/todos/list/" + listId, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+      let todos = await response.json();
+      const todoTasks = todos.map((todo) => todo.task);
+      const todoId = todos.map((todo) => todo._id);
+      todosArrayName = todoTasks;
+      todosArrayId = todoId;
+      console.log(todosArrayName);
+      console.log(todosArrayId);
+      addFromFile(todosArrayName);
 
-    let todos = await response.json();
-    const todoTasks = todos.map((todo) => todo.task);
-    const todoId = todos.map((todo) => todo._id);
-    todosArrayName = todoTasks;
-    todosArrayId = todoId;
-    console.log(todosArrayName);
-    console.log(todosArrayId);
-    addFromFile(todosArrayName);
-
-    // Handle the todos (e.g., display them in the UI)
-  } catch (error) {
-    console.error("Error fetching todos:", error);
+      // Handle the todos (e.g., display them in the UI)
+    } catch (error) {
+      console.error("Error fetching todos:", error);
+    }
   }
 }
 
