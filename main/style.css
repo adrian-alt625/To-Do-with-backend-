@@ -174,13 +174,34 @@ body {
   display: block;
 }
 
+#edit-list {
+  display: inline-block;
+  position: absolute;
+  left: 12px;
+  top: 68px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  transition: 0.2s ease;
+  background: none;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+}
+#edit-list img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  padding: 5px;
+}
+
 .main-container h2 {
   display: inline-block;
   vertical-align: middle;
   color: rgb(163, 0, 163);
   margin-right: 50px;
   font-size: 30px;
-  margin-left: 30px;
+  margin-left: 48px;
   margin-top: 60px;
   margin-bottom: 0;
 }
@@ -954,6 +975,106 @@ body {
 #load-selected-list {
   margin-top: 45px;
 }
+
+.edit-list-menu {
+  display: none;
+  background: rgb(255, 255, 255);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  /* half height and width values */
+  margin-top: -120px;
+  margin-left: -138px;
+  height: 240px;
+  width: 275px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding-top: 15px;
+  z-index: 10;
+}
+.edit-list-menu h3 {
+  display: inline-block;
+  vertical-align: middle;
+  background: rgb(255, 255, 255);
+  color: #a300a3;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 24px;
+}
+#close-edit-list {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 0;
+  margin-left: 100px;
+}
+#close-edit-list img {
+  height: 22px;
+  width: 22px;
+}
+#change-list-nameBtn {
+  margin-bottom: 0;
+}
+#delete-listBtn {
+  margin-top: 30px;
+}
+
+.change-list-name-menu {
+  display: none;
+  background: rgb(255, 255, 255);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  /* half height and width values */
+  margin-top: -110px;
+  margin-left: -150px;
+  height: 220px;
+  width: 300px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding-top: 15px;
+  z-index: 10;
+}
+.change-list-name-menu input {
+  border: none;
+  border-radius: 15px;
+  background-color: rgb(236, 236, 236);
+  margin-left: 37px;
+  height: 45px;
+  width: 200px;
+  padding-left: 20px;
+  outline: none;
+  font-size: 16px;
+  margin-top: 20px;
+  /* margin-top: 30px; */
+}
+.change-list-name-menu input::placeholder {
+  color: #696969;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.change-list-name-menu input:focus::placeholder {
+  opacity: 0;
+}
+#save-new-list-nameBtn {
+  margin-top: 30px;
+}
+
+.delete-list-confirmation {
+  display: none;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* half height and width values */
+  margin-top: -90px;
+  margin-left: -125px;
+  height: 170px;
+  width: 250px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  z-index: 10;
+}
 /* dark mode */
 
 .dark-mode #darkBtn {
@@ -1176,5 +1297,26 @@ body {
 }
 .dark-mode #listDropdown {
   background: #3b3b3b;
+  color: white;
+}
+.dark-mode .edit-list-menu {
+  background: #202020;
+}
+.dark-mode #close-edit-list img {
+  content: url(assets/close-icons/white-close.svg);
+}
+.dark-mode .edit-list-menu h3 {
+  background: #202020;
+  color: #e233d9;
+}
+.dark-mode #edit-list img {
+  content: url(assets/pencils/grey-pencil.svg);
+}
+
+.dark-mode .change-list-name-menu {
+  background: #202020;
+}
+.dark-mode .change-list-name-menu input {
+  background-color: #4a4a4a;
   color: white;
 }

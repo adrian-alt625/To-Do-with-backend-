@@ -68,6 +68,9 @@
       <button class="backBtn">
         <img src="assets/back-button/black_back_arrow.svg" />
       </button>
+      <button id="edit-list">
+        <img src="assets/pencils/black-pencil.svg" />
+      </button>
       <h2 class="heading2">To-Do List</h2>
       <button class="settings-cog2">
         <img src="assets/settings cog/grey-settings-gear-22621.svg" />
@@ -162,6 +165,29 @@
         <option value="">Select</option>
       </select>
       <button id="load-selected-list" class="orangeBtn">Load</button>
+    </div>
+    <div class="edit-list-menu">
+      <h3>Edit list</h3>
+      <button id="close-edit-list" class="backArrowBtn">
+        <img src="assets/close-icons/black-close.svg" alt="" />
+      </button>
+      <button id="change-list-nameBtn" class="orangeBtn">Name</button>
+      <button id="delete-listBtn" class="redBtn">Delete</button>
+    </div>
+    <div class="change-list-name-menu">
+      <button id="back-list-name" class="backArrowBtn">
+        <img src="assets/back-button/black_back_arrow.svg" />
+      </button>
+      <input id="change-list-name-input" type="text" placeholder="" />
+      <button id="save-new-list-nameBtn" class="greenBtn">Save</button>
+    </div>
+    <div class="delete-list-confirmation">
+      <h4>Delete list</h4>
+      <button id="close-list-delete" class="backArrowBtn">
+        <img src="assets/close-icons/black-close.svg" />
+      </button>
+      <button class="orangeBtn" id="no-delete-list">No</button>
+      <button class="redBtn" id="yes-delete-list">Yes</button>
     </div>
     <div class="blur-overlay"></div>
     <script src="script.js" defer></script>

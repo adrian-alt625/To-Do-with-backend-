@@ -165,10 +165,62 @@ function change() {
 
 add.addEventListener("click", addToList);
 
+const editListPencil = document.querySelector("#edit-list");
+const editListMenu = document.querySelector(".edit-list-menu");
+const closeEditList = document.querySelector("#close-edit-list");
+const changeListNameBtn = document.querySelector("#change-list-nameBtn");
+const deleteListBtn = document.querySelector("#delete-listBtn");
+
+const changeListNameMenu = document.querySelector(".change-list-name-menu");
+const closeChangeListName = document.querySelector("#back-list-name");
+const changeListNameInput = document.querySelector("#change-list-name-input");
+const saveNewListNameBtn = document.querySelector("#save-new-list-nameBtn");
+
+editListPencil.addEventListener("click", function () {
+  blurOverlay.style.display = "block";
+  editListMenu.style.display = "block";
+});
+closeEditList.addEventListener("click", function () {
+  blurOverlay.style.display = "none";
+  editListMenu.style.display = "none";
+});
+changeListNameBtn.addEventListener("click", function () {
+  let listName = heading2.textContent;
+  changeListNameInput.value = listName;
+  editListMenu.style.display = "none";
+  changeListNameMenu.style.display = "block";
+});
+
+closeChangeListName.addEventListener("click", function () {
+  editListMenu.style.display = "block";
+  changeListNameMenu.style.display = "none";
+});
+
+saveNewListNameBtn.addEventListener("click", changeListName);
+async function changeListName() {
+  const Id = localStorage.getItem("listId");
+  const newListName = changeListNameInput.value;
+  if (newListName !== heading2.textContent) {
+    let response = await fetch(baseUrl + "/lists/" + Id + "/change-list-name", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newListName }),
+    });
+    const result = await response.json();
+    console.log(result);
+    if ((result.message = "List name updated successfully")) {
+      heading2.textContent = newListName;
+      changeListNameInput.value = "Updated";
+    }
+  }
+}
+
 let input;
 function addToList() {
   input = document.querySelector(".input").value;
-  if (input != "") {
+  if (input != "" && input.replace(/ +/g, "") !== "") {
     let li = document.createElement("li");
     let text = document.createTextNode(input);
     todosArrayName.push(text.textContent);
@@ -182,6 +234,8 @@ function addToList() {
     span.innerHTML = "&#10006";
     li.appendChild(span);
     console.log(todosArrayName);
+  } else {
+    document.querySelector(".input").value = "";
   }
 }
 
@@ -500,6 +554,8 @@ function blurClicked() {
   changeDetailsMenu.style.display = "none";
   deleteConfirmation.style.display = "none";
   emailForm.style.display = "none";
+  editListMenu.style.display = "none";
+  changeListNameMenu.style.display = "none";
 }
 
 const changeDetailsMenu = document.querySelector(".change-details-menu");

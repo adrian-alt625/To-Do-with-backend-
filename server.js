@@ -223,6 +223,21 @@ app.get("/todos/list/:listId", async (req, res) => {
   }
 });
 
+app.patch("/lists/:Id/change-list-name", async (req, res) => {
+  const { Id } = req.params;
+  const { newListName } = req.body;
+  const list = await Lists.findOne({
+    _id: new mongoose.Types.ObjectId(Id),
+  });
+  if (!list) {
+    return res.json({ message: "list not found" });
+  }
+  list.listName = newListName;
+  await list.save();
+
+  res.json({ message: "List name updated successfully", updatedList: list });
+});
+
 app.listen(
   port,
   console.log("✅ server has started on http://localhost:" + port)
