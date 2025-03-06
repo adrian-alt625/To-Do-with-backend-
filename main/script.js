@@ -212,7 +212,47 @@ async function changeListName() {
     console.log(result);
     if ((result.message = "List name updated successfully")) {
       heading2.textContent = newListName;
-      changeListNameInput.value = "Updated";
+      editListMenu.style.display = "none";
+      changeListNameMenu.style.display = "none";
+      blurOverlay.style.display = "none";
+    }
+  }
+}
+
+const deleteListConfirmationMenu = document.querySelector(
+  ".delete-list-confirmation"
+);
+const yesDeleteList = document.querySelector("#yes-delete-list");
+const noDeleteList = document.querySelector("#no-delete-list");
+
+deleteListBtn.addEventListener("click", function () {
+  deleteListConfirmationMenu.style.display = "block";
+  editListMenu.style.display = "none";
+});
+noDeleteList.addEventListener("click", function () {
+  deleteListConfirmationMenu.style.display = "none";
+  editListMenu.style.display = "block";
+});
+yesDeleteList.addEventListener("click", deleteList);
+async function deleteList() {
+  const Id = localStorage.getItem("listId");
+  if (Id) {
+    let response = await fetch(baseUrl + "/lists/" + Id + "/delete-list", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    console.log(result.message);
+    if (result.message !== "list not found") {
+      deleteListConfirmationMenu.style.display = "none";
+      list.innerHTML = "";
+      main.style.display = "none";
+      blurOverlay.style.display = "none";
+      buttonContainer.style.display = "block";
+      dropdown.innerHTML = '<option value="">Select</option>';
+      localStorage.removeItem("listId");
     }
   }
 }
@@ -556,6 +596,7 @@ function blurClicked() {
   emailForm.style.display = "none";
   editListMenu.style.display = "none";
   changeListNameMenu.style.display = "none";
+  deleteListConfirmationMenu.style.display = "none";
 }
 
 const changeDetailsMenu = document.querySelector(".change-details-menu");

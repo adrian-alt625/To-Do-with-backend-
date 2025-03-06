@@ -1075,6 +1075,28 @@ body {
   border-radius: 10px;
   z-index: 10;
 }
+.delete-list-confirmation h4 {
+  position: relative;
+  background: rgb(255, 255, 255);
+  color: #a300a3;
+  margin: 20px;
+  margin-left: 32px;
+  margin-bottom: 0;
+  font-size: 24px;
+}
+
+.delete-list-confirmation button {
+  display: inline-block;
+  vertical-align: middle;
+  width: 70px;
+  height: 45px;
+  margin: 0;
+  margin-left: 20px;
+  margin-top: 25px;
+}
+#no-delete-list {
+  margin-left: 40px;
+}
 /* dark mode */
 
 .dark-mode #darkBtn {
@@ -1319,4 +1341,7 @@ body {
 .dark-mode .change-list-name-menu input {
   background-color: #4a4a4a;
   color: white;
+}
+.dark-mode .delete-list-confirmation {
+  background: #202020;
 }

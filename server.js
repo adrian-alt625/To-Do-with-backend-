@@ -238,6 +238,22 @@ app.patch("/lists/:Id/change-list-name", async (req, res) => {
   res.json({ message: "List name updated successfully", updatedList: list });
 });
 
+app.delete("/lists/:Id/delete-list", async (req, res) => {
+  const { Id } = req.params;
+  const deletedList = await Lists.findByIdAndDelete(Id);
+  if (!deletedList) {
+    return res.json({ message: "list not found" });
+  }
+
+  const deletedTodos = await Todo.deleteMany({ listId: Id });
+  if (deletedTodos.deletedCount === 0) {
+    return res.json({
+      message: "list deleted but no todos found for the list",
+    });
+  }
+  res.json({ message: "list and all todos deleted successfully" });
+});
+
 app.listen(
   port,
   console.log("✅ server has started on http://localhost:" + port)
