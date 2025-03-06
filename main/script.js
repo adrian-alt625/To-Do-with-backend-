@@ -469,6 +469,7 @@ function changeToMainFromSignup() {
 let userName;
 
 const usernameTaken = document.querySelector(".username-taken");
+const passwordTooShort = document.querySelector("#password-too-short");
 
 //signing up
 async function createAccount() {
@@ -485,15 +486,18 @@ async function createAccount() {
         body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
-      console.log(data.message);
+      // console.log(data.message);
       if (data.userId) {
         localStorage.setItem("userId", data.userId);
         console.log("user ID: " + data.userId);
         changeToMainFromSignup();
         userName = username;
-      } else {
-        console.log("no user Id from backend");
+      } else if (data.message == "Username already taken") {
+        console.log("username taken");
         usernameTaken.style.display = "block";
+      } else if ((data.message = "password must be as least 8 characters")) {
+        console.log("password must be as least 8 characters");
+        passwordTooShort.style.display = "block";
       }
     } catch (error) {
       console.log("Error:", error);

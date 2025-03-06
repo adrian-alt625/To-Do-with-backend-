@@ -93,7 +93,9 @@ app.post("/signup", async (req, res) => {
     //check if the username already exists
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.json({ message: "Username already taken " });
+      return res.json({ message: "Username already taken" });
+    } else if (password.length < 8) {
+      return res.json({ message: "password must be as least 8 characters" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
 
