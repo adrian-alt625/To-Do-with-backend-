@@ -1,7 +1,39 @@
 //do crtl+shift+g to open the "commit menu" to submit the updated version to GitHub
 "use strict";
 
+const baseUrl = "http://localhost:2000";
+
+async function checkSession() {
+  let response = await fetch(baseUrl + "/session", {
+    method: "GET",
+  });
+  const data = await response.json();
+  console.log(data.message);
+  if (data.message !== "no session open") {
+    localStorage.setItem("listId", data.message.id);
+    loginSignupContainer.style.display = "none";
+    changeToMainFromLogin();
+    changeToMainFromSignup();
+  }
+}
+checkSession();
+
+async function gravatar() {
+  let response = await fetch(
+    baseUrl + "/users/" + localStorage.getItem("userId") + "/gravatar",
+    {
+      method: "GET",
+    }
+  );
+  const data = await response.json();
+  const hash = data.message;
+  const pfpImgUrl = "https://www.gravatar.com/avatar/" + hash;
+  gravatarImg.src = pfpImgUrl;
+  gravatarImg.style.display = "block";
+}
+
 //assigning values for the "upload button" and the file input
+const gravatarImg = document.querySelector("#gravatar");
 const fileInput = document.querySelector(".fileInput");
 const upload = document.querySelector("#uploadBtn");
 const create = document.querySelector("#createBtn");
@@ -351,8 +383,6 @@ darkMode.addEventListener("click", toggleDarkMode);
 
 //backend begins
 
-const baseUrl = "http://localhost:2000";
-
 async function postInfo() {
   const userId = getCurrentUserId();
   let response = await fetch(baseUrl + "/todos", {
@@ -460,10 +490,12 @@ function changeToSignup() {
 function changeToMainFromLogin() {
   buttonContainer.style.display = "block";
   loginPage.style.display = "none";
+  gravatar();
 }
 function changeToMainFromSignup() {
   buttonContainer.style.display = "block";
   signupPage.style.display = "none";
+  gravatar();
 }
 
 let userName;
@@ -578,6 +610,7 @@ const blurOverlay = document.querySelector(".blur-overlay");
 
 settingsCog.addEventListener("click", showOptions);
 settingsCog2.addEventListener("click", showOptions);
+gravatarImg.addEventListener("click", showOptions);
 
 function showOptions() {
   optionsMenu.style.display = "block";
@@ -800,6 +833,17 @@ function logOut() {
   localStorage.removeItem("userId");
   localStorage.removeItem("listId");
   window.location.href = baseUrl;
+  logout();
+}
+async function logout() {
+  let response = await fetch(baseUrl + "/logout", {
+    credentials: "include",
+    method: "GET",
+  });
+  const data = response.message;
+  if (data == "logged out successfully") {
+    console.log("logout successful");
+  }
 }
 
 const backBtn = document.querySelector(".backBtn");

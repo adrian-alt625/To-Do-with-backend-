@@ -4,8 +4,23 @@ const port = 2000;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
+const session = require("express-session");
+const crypto = require("crypto");
 
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+  })
+);
+
+app.use(
+  session({
+    secret: "1234",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
 
 require("dotenv").config();
 console.log("MONGO_URI:", process.env.MONGO_URI);
@@ -125,6 +140,9 @@ app.post("/login", async (req, res) => {
   if (!isMatch) {
     return res.json({ message: "Incorrect password" });
   }
+
+  req.session.user = { id: user._id };
+  console.log("session userid: " + req.session.user.id);
 
   res.json({ message: "login successful", userId: user._id });
 });
@@ -254,6 +272,29 @@ app.delete("/lists/:Id/delete-list", async (req, res) => {
     });
   }
   res.json({ message: "list and all todos deleted successfully" });
+});
+
+app.get("/session", async (req, res) => {
+  console.log(req.session.user);
+  if (req.session.user) {
+    res.json({ message: req.session.user });
+  } else {
+    res.json({ message: "no session open" });
+  }
+});
+
+app.get("/logout", async (req, res) => {
+  req.session.destroy();
+  res.clearCookie("connect.sid");
+  res.send("logged out successfully");
+});
+
+app.get("/users/:id/gravatar", async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  username = user.username;
+  const hashed = crypto.createHash("md5").update(username).digest("hex");
+  res.json({ message: hashed });
 });
 
 app.listen(

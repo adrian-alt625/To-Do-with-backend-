@@ -13,6 +13,29 @@ body {
   padding: 0;
   font-family: Poppins;
   height: 100vh; /* Ensures the gradient fills the whole screen */
+  overflow: hidden;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Centers it */
+  text-align: center;
+  padding: 10px;
+  background-color: transparent; /* Ensures no white background */
+  font-size: 14px;
+  width: 100%; /* Ensures it stretches across the screen */
+}
+
+#gravatar {
+  height: 50px;
+  width: 50px;
+  margin-top: 15px;
+  margin-left: 15px;
+  display: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .greenBtn {
