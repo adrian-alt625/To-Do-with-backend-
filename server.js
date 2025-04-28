@@ -34,11 +34,10 @@ mongoose
 app.use(express.static("main"));
 app.use(express.json());
 
-//
 /*creating the blueprint for each "Todo" */
 const todoSchema = new mongoose.Schema({
-  task: { type: String, required: true }, // Task name (required)
-  completed: { type: Boolean, default: false }, // Completion status (default: false)
+  task: { type: String, required: true },
+  completed: { type: Boolean, default: false },
   listId: { type: mongoose.Schema.Types.ObjectId, ref: "List", required: true },
 });
 
@@ -46,10 +45,10 @@ const todoSchema = new mongoose.Schema({
 const Todo = mongoose.model("Todo", todoSchema);
 module.exports = Todo;
 
-app.get("/todo", async (req, res) => {
-  const { listId } = req.query;
+app.get("/todo/:listId", async (req, res) => {
+  const { listId } = req.params;
   if (!listId) {
-    return res.json({ message: "list ID not found " });
+    return res.status(200).json({ message: "list ID not found" });
   }
   const oldTodos = await Todo.find({ listId });
   res.json(oldTodos);
@@ -57,42 +56,48 @@ app.get("/todo", async (req, res) => {
 
 app.post("/todos", async (req, res) => {
   const { task, completed, listId } = req.body;
-  console.log({ task, completed, listId });
-  // res.send({ status: "recieved" });
-  const newTodo = new Todo({ task, completed, listId });
-  const savedTodo = await newTodo.save();
-  console.log("Saved To-Do: " + savedTodo);
-  res.json(savedTodo);
+  if (listId) {
+    console.log({ task, completed, listId });
+    // res.send({ status: "recieved" });
+    const newTodo = new Todo({ task, completed, listId });
+    const savedTodo = await newTodo.save();
+    console.log("Saved To-Do: " + savedTodo);
+    res.json(savedTodo);
+  } else {
+    res.status(200).json({ message: "listId not found" });
+  }
 });
 
 app.delete("/todos/:id", async (req, res) => {
   const { id } = req.params;
+  if (id == ":id") {
+    return res.status(200).json({ message: "valid Id not provided" });
+  }
   const deletedTodo = await Todo.findByIdAndDelete(id);
   res.json({ message: "todo deleted successfully", deletedTodo });
 });
 
 app.patch("/todos/:id", async (req, res) => {
   const { id } = req.params;
+  if (id == ":id") {
+    return res.status(200).json({ message: "valid Id not provided" });
+  }
   const todo = await Todo.findById(id);
   const updatedTodo = await Todo.findByIdAndUpdate(
     id,
     { $set: { completed: !todo.completed } },
     { new: true }
   );
-
   res.json({ message: "Todo updated", updatedTodo });
 });
 
 app.get("/todos/:id", async (req, res) => {
   const { id } = req.params;
+  if (id == ":id") {
+    return res.status(200).json({ message: "valid Id not provided" });
+  }
   const todo = await Todo.findById(id);
   res.json(todo);
-});
-
-app.delete("/todos", async (req, res) => {
-  const { userId } = req.query;
-  await Todo.deleteMany({ userId });
-  res.json({ message: "Todos for user deleted" });
 });
 
 const userSchema = new mongoose.Schema({
@@ -104,28 +109,34 @@ module.exports = User;
 
 app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
-  try {
-    //check if the username already exists
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.json({ message: "Username already taken" });
-    } else if (password.length < 8) {
-      return res.json({ message: "password must be as least 8 characters" });
+  if (username && password) {
+    try {
+      //check if the username already exists
+      const existingUser = await User.findOne({ username });
+      if (existingUser) {
+        return res.json({ message: "Username already taken" });
+      } else if (password.length < 8) {
+        return res.json({ message: "password must be as least 8 characters" });
+      }
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      //create new user
+      const newUser = new User({ username, password: hashedPassword });
+      const savedUser = await newUser.save();
+      console.log("saved user:", savedUser);
+
+      res.json({
+        message: "New user created successfully",
+        userId: savedUser._id,
+      });
+    } catch (err) {
+      console.error("Error creating user:", err);
+      res.json({ message: "Serving error" });
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    //create new user
-    const newUser = new User({ username, password: hashedPassword });
-    const savedUser = await newUser.save();
-    console.log("saved user:", savedUser);
-
-    res.json({
-      message: "New user created successfully",
-      userId: savedUser._id,
-    });
-  } catch (err) {
-    console.error("Error creating user:", err);
-    res.json({ message: "Serving error" });
+  } else {
+    return res
+      .status(200)
+      .json({ message: "username and/or password not provided" });
   }
 });
 
@@ -154,12 +165,12 @@ app.patch("/users/:id/change-username", async (req, res) => {
   console.log(newUsername);
 
   if (!newUsername) {
-    return res.json({ message: "New username is required" });
+    return res.status(200).json({ message: "New username is required" });
   }
 
   const existingUser = await User.findOne({ username: newUsername });
   if (existingUser) {
-    return res.json({ message: "Username is already taken." });
+    return res.status(200).json({ message: "Username is already taken." });
   }
 
   await User.findByIdAndUpdate(id, { username: newUsername });
@@ -169,6 +180,9 @@ app.patch("/users/:id/change-username", async (req, res) => {
 app.patch("/users/:id/change-password", async (req, res) => {
   const { id } = req.params;
   const { currentPassword, newPassword } = req.body;
+  if (id == ":id") {
+    return res.status(200).json({ message: "valid Id not provided" });
+  }
 
   const user = await User.findById(id);
   if (!user) {
@@ -188,6 +202,9 @@ app.patch("/users/:id/change-password", async (req, res) => {
 
 app.delete("/users/:id/delete-account", async (req, res) => {
   const { id } = req.params;
+  if (id == ":id") {
+    return res.status(200).json({ message: "valid Id not provided" });
+  }
 
   const deletedUser = await User.findByIdAndDelete(id);
   if (!deletedUser) {
@@ -206,7 +223,7 @@ module.exports = Lists;
 app.post("/lists", async (req, res) => {
   const { listName, userId } = req.body;
   if (!listName || !userId) {
-    return res.json({ error: "listname or userId is missing " });
+    return res.status(200).json({ error: "listname or userId is missing " });
   }
 
   const newList = new Lists({
@@ -223,6 +240,9 @@ app.post("/lists", async (req, res) => {
 
 app.get("/lists/:id", async (req, res) => {
   const { id } = req.params;
+  if (id == ":id") {
+    return res.status(200).json({ message: "valid Id not provided" });
+  }
   const lists = await Lists.find({
     userId: new mongoose.Types.ObjectId(id),
   });
@@ -231,6 +251,9 @@ app.get("/lists/:id", async (req, res) => {
 
 app.get("/todos/list/:listId", async (req, res) => {
   const { listId } = req.params;
+  if (listId == ":listId") {
+    return res.status(200).json({ message: "valid listId not provided" });
+  }
 
   try {
     const todos = await Todo.find({
@@ -245,6 +268,9 @@ app.get("/todos/list/:listId", async (req, res) => {
 
 app.patch("/lists/:Id/change-list-name", async (req, res) => {
   const { Id } = req.params;
+  if (Id == ":Id") {
+    return res.status(200).json({ message: "valid Id not provided" });
+  }
   const { newListName } = req.body;
   const list = await Lists.findOne({
     _id: new mongoose.Types.ObjectId(Id),
@@ -260,6 +286,9 @@ app.patch("/lists/:Id/change-list-name", async (req, res) => {
 
 app.delete("/lists/:Id/delete-list", async (req, res) => {
   const { Id } = req.params;
+  if (Id == ":Id") {
+    return res.status(200).json({ message: "valid Id not provided" });
+  }
   const deletedList = await Lists.findByIdAndDelete(Id);
   if (!deletedList) {
     return res.json({ message: "list not found" });
@@ -275,7 +304,6 @@ app.delete("/lists/:Id/delete-list", async (req, res) => {
 });
 
 app.get("/session", async (req, res) => {
-  console.log(req.session.user);
   if (req.session.user) {
     res.json({ message: req.session.user });
   } else {
@@ -291,10 +319,19 @@ app.get("/logout", async (req, res) => {
 
 app.get("/users/:id/gravatar", async (req, res) => {
   const { id } = req.params;
+  if (id == ":id") {
+    return res.status(200).json({ message: "valid Id not provided" });
+  }
   const user = await User.findById(id);
   username = user.username;
   const hashed = crypto.createHash("md5").update(username).digest("hex");
   res.json({ message: hashed });
+});
+
+app.post("/darkMode", async (req, res) => {
+  const { preference } = req.body;
+  res.cookie("prefersDarkMode", preference, { httpOnly: false });
+  res.json({ success: true });
 });
 
 app.listen(

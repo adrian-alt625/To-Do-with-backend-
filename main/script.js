@@ -374,12 +374,40 @@ function downloadFile() {
 
 saveBtn.addEventListener("click", downloadFile);
 
+// const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+let preference = true;
+console.log(document.cookie);
+if (document.cookie == "prefersDarkMode=true") {
+  toggleDarkMode();
+}
 //dark mode toggle
-function toggleDarkMode() {
+async function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
+
+  let response = await fetch(baseUrl + "/darkMode", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json", // the type of file (json)
+    },
+    body: JSON.stringify({
+      preference: preference,
+    }),
+  });
+
+  console.log(document.cookie);
+  if (document.cookie == "prefersDarkMode=true") {
+    preference = false;
+  } else if (document.cookie == "prefersDarkMode=false") {
+    preference = true;
+  }
 }
 
 darkMode.addEventListener("click", toggleDarkMode);
+
+// if (isDarkMode) {
+//   toggleDarkMode();
+// }
 
 //backend begins
 
