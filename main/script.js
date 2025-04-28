@@ -1,7 +1,7 @@
 //do crtl+shift+g to open the "commit menu" to submit the updated version to GitHub
 "use strict";
 
-const baseUrl = "https://to-do-with-backend-production.up.railway.app/";
+const baseUrl = "https://to-do-with-backend-production.up.railway.app";
 
 async function checkSession() {
   let response = await fetch(baseUrl + "/session", {
