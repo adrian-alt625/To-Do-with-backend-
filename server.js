@@ -1,36 +1,46 @@
 const express = require("express");
 const app = express();
-const port = 2000;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 const session = require("express-session");
 const crypto = require("crypto");
 
+// Allow Railway to set the PORT dynamically
+const PORT = process.env.PORT || 2000;
+
+// CORS setup
 app.use(
   cors({
     credentials: true,
+    origin: true, // allow requests from any origin (better: replace with specific domain later)
   })
 );
 
+// Session setup
 app.use(
   session({
-    secret: "1234",
+    secret: process.env.SESSION_SECRET || "default_secret", // Use env variable for secret!
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false },
+    cookie: { secure: false }, // OK for dev; for production use secure cookies
   })
 );
 
+// Load environment variables
 require("dotenv").config();
-console.log("MONGO_URI:", process.env.MONGO_URI);
 
-// Connect to MongoDB
+// MongoDB connection
+const mongoURI = process.env.MONGO_URL || process.env.MONGO_URI;
+console.log("Mongo URI:", mongoURI);
+
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
-
 app.use(express.static("main"));
 app.use(express.json());
 
@@ -335,6 +345,6 @@ app.post("/darkMode", async (req, res) => {
 });
 
 app.listen(
-  port,
-  console.log("✅ server has started on http://localhost:" + port)
+  PORT,
+  console.log("✅ server has started on http://localhost:" + PORT)
 );
