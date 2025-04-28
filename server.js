@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs"); // <-- changed to bcryptjs
 const cors = require("cors");
 const session = require("express-session");
 const crypto = require("crypto");
@@ -13,17 +13,17 @@ const PORT = process.env.PORT || 2000;
 app.use(
   cors({
     credentials: true,
-    origin: true, // allow requests from any origin (better: replace with specific domain later)
+    origin: true,
   })
 );
 
 // Session setup
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "default_secret", // Use env variable for secret!
+    secret: process.env.SESSION_SECRET || "default_secret",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // OK for dev; for production use secure cookies
+    cookie: { secure: false },
   })
 );
 
@@ -41,6 +41,7 @@ mongoose
   })
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
+
 app.use(express.static("main"));
 app.use(express.json());
 
@@ -51,7 +52,6 @@ const todoSchema = new mongoose.Schema({
   listId: { type: mongoose.Schema.Types.ObjectId, ref: "List", required: true },
 });
 
-// Create and export the Todo model
 const Todo = mongoose.model("Todo", todoSchema);
 module.exports = Todo;
 
@@ -68,7 +68,6 @@ app.post("/todos", async (req, res) => {
   const { task, completed, listId } = req.body;
   if (listId) {
     console.log({ task, completed, listId });
-    // res.send({ status: "recieved" });
     const newTodo = new Todo({ task, completed, listId });
     const savedTodo = await newTodo.save();
     console.log("Saved To-Do: " + savedTodo);
@@ -121,7 +120,6 @@ app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   if (username && password) {
     try {
-      //check if the username already exists
       const existingUser = await User.findOne({ username });
       if (existingUser) {
         return res.json({ message: "Username already taken" });
@@ -130,7 +128,6 @@ app.post("/signup", async (req, res) => {
       }
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      //create new user
       const newUser = new User({ username, password: hashedPassword });
       const savedUser = await newUser.save();
       console.log("saved user:", savedUser);
@@ -224,7 +221,7 @@ app.delete("/users/:id/delete-account", async (req, res) => {
 });
 
 const listSchema = new mongoose.Schema({
-  listName: { type: String, required: true }, // Task name (required)
+  listName: { type: String, required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
 const Lists = mongoose.model("List", listSchema);
